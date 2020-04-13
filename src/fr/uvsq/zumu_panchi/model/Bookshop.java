@@ -31,7 +31,7 @@ public class Bookshop {
     	
     	stocks.put(new Book("Hokuto no Ken", "Shueisha", 1983, 6.0f), 2);
     	stocks.put(new Book("JoJo's Bizarre Adventure", "Shueisha", 1986, 7.2f), 2);
-    	stocks.put(new Book("20th Century Boys", "Shōgakukan", 2000, 4.5f), 23);
+    	stocks.put(new Book("20th Century Boys", "Shogakukan", 2000, 4.5f), 23);
     	stocks.put(new Book("Berserk", "Hakusensha", 1997, 9.3f), 5);
     }
 // ----------- << class.extras@AAAAAAFxcn2wxx4p7L4= >>
