@@ -27,9 +27,9 @@ public class Cart {
 
 	// ----------- << method.annotations@AAAAAAFxcAr4XHz/LIY= >>
 	// ----------- >>
-	public int getPrice() {
+	public float getPrice() {
 		// ----------- << method.body@AAAAAAFxcAr4XHz/LIY= >>
-		int totalPrice;
+		float totalPrice;
 
 		totalPrice = 0;
 
