@@ -47,7 +47,7 @@ public class ComicBook extends Work {
 
     // ----------- << method.annotations@AAAAAAFxcAg513y+eRk= >>
     // ----------- >>
-    public ComicBook(String title, String publisher, int publishingYear, int suppliersPrice) {
+    public ComicBook(String title, String publisher, int publishingYear, float suppliersPrice) {
     // ----------- << method.body@AAAAAAFxcAg513y+eRk= >>
     	super(title, publisher, publishingYear, suppliersPrice);
     	this.margin = 40;

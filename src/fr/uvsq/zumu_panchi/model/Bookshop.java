@@ -28,6 +28,11 @@ public class Bookshop {
 
     public Bookshop() {
     	stocks = new HashMap<Work, Integer>();
+    	
+    	stocks.put(new Book("Hokuto no Ken", "Shueisha", 1983, 6), 2);
+    	stocks.put(new Book("JoJo's Bizarre Adventure", "Shueisha", 1986, 7), 2);
+    	stocks.put(new Book("Hokuto no Ken", "Shueisha", 1983, 6), 2);
+    	stocks.put(new Book("Hokuto no Ken", "Shueisha", 1983, 6), 2);
     }
 // ----------- << class.extras@AAAAAAFxcn2wxx4p7L4= >>
 // ----------- >>

@@ -28,7 +28,7 @@ public class Work {
 
     // ----------- << attribute.annotations@AAAAAAFxcAJ7+HvmPC4= >>
     // ----------- >>
-    protected int suppliersPrice;
+    protected float suppliersPrice;
     
     protected int loyaltyPoints;
 
@@ -52,7 +52,7 @@ public class Work {
         return publishingYear;
     }
 
-    public int getSuppliersPrice() {
+    public float getSuppliersPrice() {
         return suppliersPrice;
     }
 
@@ -82,7 +82,7 @@ public class Work {
 
     // ----------- << method.annotations@AAAAAAFxcAK9gnvtmGg= >>
     // ----------- >>
-    public int getSellingPrice() {
+    public float getSellingPrice() {
     // ----------- << method.body@AAAAAAFxcAK9gnvtmGg= >>
     	return (this.margin / 100) * this.suppliersPrice;
     // ----------- >>
@@ -97,7 +97,7 @@ public class Work {
 
     // ----------- << method.annotations@AAAAAAFxcAa2YnySkT0= >>
     // ----------- >>
-    public Work(String title, String publisher, int publishingYear, int suppliersPrice) {
+    public Work(String title, String publisher, int publishingYear, float suppliersPrice) {
     	this.title = title;
     	this.publisher = publisher;
     	this.publishingYear = publishingYear;
