@@ -1,6 +1,8 @@
 package fr.uvsq.zumu_panchi.view;
 
+import javax.swing.JComponent;
 import javax.swing.JFrame;
+import javax.swing.JTabbedPane;
 
 @SuppressWarnings("serial")
 public class Master extends JFrame {
@@ -12,6 +14,17 @@ public class Master extends JFrame {
 		super(TITLE);
 		setSize(WIDTH, HEIGHT);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
+        
+        JTabbedPane tabbedPane = new JTabbedPane();
+
+        JComponent panel1 = new OrderPane();
+        tabbedPane.addTab("Tab 1", panel1);
+
+        JComponent panel2 = new SalesPane();
+        tabbedPane.addTab("Tab 2", panel2);
+        this.add(tabbedPane);
+        
+
         
         
         setVisible(true);
