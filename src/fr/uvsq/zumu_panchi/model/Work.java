@@ -97,9 +97,11 @@ public class Work {
 
     // ----------- << method.annotations@AAAAAAFxcAa2YnySkT0= >>
     // ----------- >>
-    public Work(String title, String publisher, String publishingYear, int suppliersPrice) {
-    // ----------- << method.body@AAAAAAFxcAa2YnySkT0= >>
-    // ----------- >>
+    public Work(String title, String publisher, int publishingYear, int suppliersPrice) {
+    	this.title = title;
+    	this.publisher = publisher;
+    	this.publishingYear = publishingYear;
+    	this.suppliersPrice = suppliersPrice;
     }
 // ----------- << class.extras@AAAAAAFxcAF+1nunV8E= >>
 // ----------- >>

@@ -35,7 +35,7 @@ public class Book extends Work {
 
     // ----------- << method.annotations@AAAAAAFxcAfiJXytv1c= >>
     // ----------- >>
-    public Book(String title, String publisher, String publishingYear, int suppliersPrice) {
+    public Book(String title, String publisher, int publishingYear, int suppliersPrice) {
     // ----------- << method.body@AAAAAAFxcAfiJXytv1c= >>
     	super(title, publisher, publishingYear, suppliersPrice);
     	this.margin = 20;

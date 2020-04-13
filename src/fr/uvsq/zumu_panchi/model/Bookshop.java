@@ -5,6 +5,7 @@
 */
 package fr.uvsq.zumu_panchi.model;
 
+import java.util.HashMap;
 import java.util.Map;
 
 // ----------- << imports@AAAAAAFxcn2wxx4p7L4= >>
@@ -25,6 +26,9 @@ public class Bookshop {
         this.stocks = stocks;
     }
 
+    public Bookshop() {
+    	stocks = new HashMap<Work, Integer>();
+    }
 // ----------- << class.extras@AAAAAAFxcn2wxx4p7L4= >>
 // ----------- >>
 }
