@@ -15,13 +15,13 @@ import java.util.ArrayList;
 public class SalesJournal {
     // ----------- << attribute.annotations@AAAAAAFxcAzt1n08CB4= >>
     // ----------- >>
-    private ArrayList<Cart> carts;
+    ArrayList<Cart> carts;
 
-    ArrayList<Cart> getCarts() {
+    public ArrayList<Cart> getCarts() {
         return carts;
     }
 
-    void setCarts(ArrayList<Cart> carts) {
+    public void setCarts(ArrayList<Cart> carts) {
         this.carts = carts;
     }
 

@@ -16,13 +16,13 @@ package fr.uvsq.zumu_panchi.model;
 public class Book extends Work {
     // ----------- << attribute.annotations@AAAAAAFxcAQhRXwnkVA= >>
     // ----------- >>
-    private String author;
+    String author;
 
-    private String getAuthor() {
+    public String getAuthor() {
         return author;
     }
 
-    private void setAuthor(String author) {
+    public void setAuthor(String author) {
         this.author = author;
     }
 

@@ -15,13 +15,13 @@ import java.util.Map;
 public class Bookshop {
     // ----------- << attribute.annotations@AAAAAAFxcn3FgB5TipY= >>
     // ----------- >>
-    private Map<Work, Integer> stocks;
+    Map<Work, Integer> stocks;
 
-    Map<Work, Integer> getStocks() {
+    public Map<Work, Integer> getStocks() {
         return stocks;
     }
 
-    void setStocks(Map<Work, Integer> stocks) {
+    public void setStocks(Map<Work, Integer> stocks) {
         this.stocks = stocks;
     }
 

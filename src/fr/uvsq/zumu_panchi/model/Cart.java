@@ -15,13 +15,13 @@ import java.util.ArrayList;
 public class Cart {
     // ----------- << attribute.annotations@AAAAAAFxcAp1M3z4V+s= >>
     // ----------- >>
-    private ArrayList<Book> books;
+    ArrayList<Book> books;
 
     ArrayList<Book> getBooks() {
         return books;
     }
 
-    void setBooks(ArrayList<Book> books) {
+    public void setBooks(ArrayList<Book> books) {
         this.books = books;
     }
 

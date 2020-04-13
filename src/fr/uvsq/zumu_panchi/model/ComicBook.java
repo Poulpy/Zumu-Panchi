@@ -16,25 +16,25 @@ package fr.uvsq.zumu_panchi.model;
 public class ComicBook extends Work {
     // ----------- << attribute.annotations@AAAAAAFxcAWK3nxiOZg= >>
     // ----------- >>
-    private String scriptwriter;
+    String scriptwriter;
 
     // ----------- << attribute.annotations@AAAAAAFxcAXjbHxpUV4= >>
     // ----------- >>
-    private String cartoonist;
+    String cartoonist;
 
-    private String getScriptwriter() {
+    public String getScriptwriter() {
         return scriptwriter;
     }
 
-    private String getCartoonist() {
+    public String getCartoonist() {
         return cartoonist;
     }
 
-    private void setScriptwriter(String scriptwriter) {
+    public void setScriptwriter(String scriptwriter) {
         this.scriptwriter = scriptwriter;
     }
 
-    private void setCartoonist(String cartoonist) {
+    public void setCartoonist(String cartoonist) {
         this.cartoonist = cartoonist;
     }
 

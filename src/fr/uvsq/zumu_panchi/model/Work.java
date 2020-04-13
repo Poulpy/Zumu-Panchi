@@ -16,19 +16,19 @@ package fr.uvsq.zumu_panchi.model;
 public class Work {
     // ----------- << attribute.annotations@AAAAAAFxcAHJqXvRiiE= >>
     // ----------- >>
-    private String title;
+    protected String title;
 
     // ----------- << attribute.annotations@AAAAAAFxcAIkonvYevo= >>
     // ----------- >>
-    private String publisher;
+    protected String publisher;
 
     // ----------- << attribute.annotations@AAAAAAFxcAJKaXvf4Q0= >>
     // ----------- >>
-    private int publishingYear;
+    protected int publishingYear;
 
     // ----------- << attribute.annotations@AAAAAAFxcAJ7+HvmPC4= >>
     // ----------- >>
-    private int suppliersPrice;
+    protected int suppliersPrice;
 
     /**
     * In percent
@@ -36,45 +36,45 @@ public class Work {
 
     // ----------- << attribute.annotations@AAAAAAFxcAMcH3v0hPg= >>
     // ----------- >>
-    private int margin;
+    protected int margin;
 
-    protected String getTitle() {
+    public String getTitle() {
         return title;
     }
 
-    protected String getPublisher() {
+    public String getPublisher() {
         return publisher;
     }
 
-    protected int getPublishingYear() {
+    public int getPublishingYear() {
         return publishingYear;
     }
 
-    protected int getSuppliersPrice() {
+    public int getSuppliersPrice() {
         return suppliersPrice;
     }
 
-    protected int getMargin() {
+    public int getMargin() {
         return margin;
     }
 
-    protected void setTitle(String title) {
+    public void setTitle(String title) {
         this.title = title;
     }
 
-    protected void setPublisher(String publisher) {
+    public void setPublisher(String publisher) {
         this.publisher = publisher;
     }
 
-    protected void setPublishingYear(int publishingYear) {
+    public void setPublishingYear(int publishingYear) {
         this.publishingYear = publishingYear;
     }
 
-    protected void setSuppliersPrice(int suppliersPrice) {
+    public void setSuppliersPrice(int suppliersPrice) {
         this.suppliersPrice = suppliersPrice;
     }
 
-    protected void setMargin(int margin) {
+    public void setMargin(int margin) {
         this.margin = margin;
     }
 
