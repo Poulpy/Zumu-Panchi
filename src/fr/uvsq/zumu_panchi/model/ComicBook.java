@@ -50,6 +50,8 @@ public class ComicBook extends Work {
     public ComicBook(String title, String publisher, String publishingYear, int suppliersPrice) {
     // ----------- << method.body@AAAAAAFxcAg513y+eRk= >>
     	super(title, publisher, publishingYear, suppliersPrice);
+    	this.margin = 40;
+    	this.loyaltyPoints = 50;
     // ----------- >>
     }
 // ----------- << class.extras@AAAAAAFxcAVexXw4F+c= >>

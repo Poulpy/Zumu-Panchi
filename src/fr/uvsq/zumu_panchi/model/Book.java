@@ -38,6 +38,8 @@ public class Book extends Work {
     public Book(String title, String publisher, String publishingYear, int suppliersPrice) {
     // ----------- << method.body@AAAAAAFxcAfiJXytv1c= >>
     	super(title, publisher, publishingYear, suppliersPrice);
+    	this.margin = 20;
+    	this.loyaltyPoints = 30;
     // ----------- >>
     }
 // ----------- << class.extras@AAAAAAFxcAQHa3v9Uag= >>

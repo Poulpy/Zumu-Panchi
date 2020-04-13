@@ -29,6 +29,8 @@ public class Work {
     // ----------- << attribute.annotations@AAAAAAFxcAJ7+HvmPC4= >>
     // ----------- >>
     protected int suppliersPrice;
+    
+    protected int loyaltyPoints;
 
     /**
     * In percent
@@ -85,6 +87,7 @@ public class Work {
     	return (this.margin / 100) * this.suppliersPrice;
     // ----------- >>
     }
+    
     /**
     * @param title 
     * @param publisher 
