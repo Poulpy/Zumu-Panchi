@@ -65,7 +65,7 @@ public class Work {
     // ----------- >>
     public float getSellingPrice() {
     // ----------- << method.body@AAAAAAFxcAK9gnvtmGg= >>
-    	return (this.margin / 100) * this.suppliersPrice;
+    	return (this.margin / 100f) * this.suppliersPrice;
     // ----------- >>
     }
     

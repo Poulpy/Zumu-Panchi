@@ -55,7 +55,7 @@ public class Bookshop {
             arr[i][0] = b.title;
             arr[i][1] = b.publisher;
             arr[i][2] = b.publishingYear;
-            arr[i][3] = b.getSellingPrice();
+            arr[i][3] = String.format("%.2f", b.getSellingPrice()) + " €";
             arr[i][4] = mapping.getValue();
 
             i++;
