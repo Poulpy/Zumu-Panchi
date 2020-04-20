@@ -19,22 +19,12 @@ public class OrderPane extends JPanel {
 		JLabel title;
 		
 		title = new JLabel("Order");
-		
-		String[] columnNames = bookshop.getInformations();
 
-		
-		Object[][] data = bookshop.getArray();
-		
-		System.out.println(Arrays.deepToString(columnNames));
-		JTable table = new JTable(data, columnNames);
+		JTable table = new JTable(new WorksTable());
 
 		
 		
 		this.add(title);
-		/*
-		this.add(table.getTableHeader());
-		this.add(table);
-		*/
 		this.add(new JScrollPane(table));
 	}
 }
