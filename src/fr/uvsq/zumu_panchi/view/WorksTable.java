@@ -12,11 +12,8 @@ public class WorksTable extends AbstractTableModel {
 
     private final String[] headers;
 
-    public WorksTable() {
+    public WorksTable(Bookshop bookshop) {
         super();
-
-        Bookshop bookshop;
-        bookshop = new Bookshop();
 
         headers = bookshop.getInformations();
         datas = bookshop.getArray();

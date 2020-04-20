@@ -7,59 +7,47 @@ package fr.uvsq.zumu_panchi.model;
 
 import java.util.ArrayList;
 
-// ----------- << imports@AAAAAAFxcApPPXzNMrw= >>
-// ----------- >>
-
-// ----------- << class.annotations@AAAAAAFxcApPPXzNMrw= >>
-// ----------- >>
 public class Cart {
-	// ----------- << attribute.annotations@AAAAAAFxcAp1M3z4V+s= >>
-	// ----------- >>
-	ArrayList<Book> books;
 
-	ArrayList<Book> getBooks() {
-		return books;
-	}
-	
-	public Cart(ArrayList<Book> books) {
-		this.books = books;
-	}
-	
-	public void setBooks(ArrayList<Book> books) {
-		this.books = books;
-	}
+    private ArrayList<Work> works;
 
-	// ----------- << method.annotations@AAAAAAFxcAr4XHz/LIY= >>
-	// ----------- >>
-	public float getPrice() {
-		// ----------- << method.body@AAAAAAFxcAr4XHz/LIY= >>
-		float totalPrice;
+    public ArrayList<Work> getBooks() {
+        return this.works;
+    }
+    
+    public void addItemToCart(Work work) {
+        this.works.add(work);
+    }
 
-		totalPrice = 0;
+    public Cart() {
+        this.works = new ArrayList<Work>();
+    }
+    
+    public Cart(ArrayList<Work> works) {
+        this.works = works;
+    }
 
-		for (Book b : this.books) {
-			totalPrice += b.getSellingPrice();
-		}
+    public float getPrice() {
+        float totalPrice;
 
-		return totalPrice;
-		// ----------- >>
-	}
+        totalPrice = 0;
 
-	// ----------- << method.annotations@AAAAAAFxcAs/pn0IoH8= >>
-	// ----------- >>
-	public int getLoyaltyPoints() {
-		// ----------- << method.body@AAAAAAFxcAs/pn0IoH8= >>
-		int totalPoints;
+        for (Work b : this.works) {
+            totalPrice += b.getSellingPrice();
+        }
 
-		totalPoints = 0;
+        return totalPrice;
+    }
 
-		for (Book b : this.books) {
-			totalPoints += b.loyaltyPoints;
-		}
+    public int getLoyaltyPoints() {
+        int totalPoints;
 
-		return totalPoints;
-		// ----------- >>
-	}
-// ----------- << class.extras@AAAAAAFxcApPPXzNMrw= >>
-// ----------- >>
+        totalPoints = 0;
+
+        for (Work b : this.works) {
+            totalPoints += b.loyaltyPoints;
+        }
+
+        return totalPoints;
+    }
 }
