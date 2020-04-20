@@ -26,22 +26,23 @@ public class OrderPane extends JPanel implements ActionListener {
 		
 		title = new JLabel("Order");
 
-		JTable table = new JTable(new WorksTable());
+		this.table = new JTable(new WorksTable());
 		orderButton = new JButton("Order");
+		orderButton.addActionListener(this);
 
 		
 		
 		this.add(title);
-		this.add(new JScrollPane(table));
+		this.add(new JScrollPane(this.table));
 		this.add(orderButton);
 	}
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == this.orderButton) {
-            int[] selectedRows = table.getSelectedRows();
+            int[] selectedRows = this.table.getSelectedRows();
             for (int i = 0; i != selectedRows.length; i++) {
-                System.out.println("Name : " + table.getValueAt(i, 0));
+                System.out.println("Name : " + table.getValueAt(selectedRows[i], 0));
             }
         }
     }
