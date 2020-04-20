@@ -5,14 +5,12 @@
 */
 package fr.uvsq.zumu_panchi.model;
 
-
-
-
-// ----------- << imports@AAAAAAFxcAQHa3v9Uag= >>
-// ----------- >>
-
-// ----------- << class.annotations@AAAAAAFxcAQHa3v9Uag= >>
-// ----------- >>
+/**
+ * A book is a work with an author
+ * 
+ * @author paul
+ *
+ */
 public class Book extends Work {
     // ----------- << attribute.annotations@AAAAAAFxcAQhRXwnkVA= >>
     // ----------- >>
@@ -21,24 +19,18 @@ public class Book extends Work {
     public String getAuthor() {
         return author;
     }
-    
-    /**
-    * @param title 
-    * @param publisher 
-    * @param publishingYear 
-    * @param suppliersPrice
-    */
 
-    // ----------- << method.annotations@AAAAAAFxcAfiJXytv1c= >>
-    // ----------- >>
+    /**
+     * @param title
+     * @param publisher
+     * @param publishingYear
+     * @param suppliersPrice
+     */
     public Book(String title, String publisher, int publishingYear, float suppliersPrice, String author) {
-    // ----------- << method.body@AAAAAAFxcAfiJXytv1c= >>
-    	super(title, publisher, publishingYear, suppliersPrice);
-    	this.author = author;
-    	this.margin = 20;
-    	this.loyaltyPoints = 30;
-    // ----------- >>
+        super(title, publisher, publishingYear, suppliersPrice);
+
+        this.author = author;
+        this.margin = 20;
+        this.loyaltyPoints = 30;
     }
-// ----------- << class.extras@AAAAAAFxcAQHa3v9Uag= >>
-// ----------- >>
 }

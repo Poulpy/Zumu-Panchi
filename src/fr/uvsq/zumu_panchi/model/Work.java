@@ -8,11 +8,11 @@ package fr.uvsq.zumu_panchi.model;
 
 
 
-// ----------- << imports@AAAAAAFxcAF+1nunV8E= >>
-// ----------- >>
-
-// ----------- << class.annotations@AAAAAAFxcAF+1nunV8E= >>
-// ----------- >>
+/**
+ * Represents a work : book, comicbook, novel...
+ * @author paul
+ *
+ */
 public class Work {
     // ----------- << attribute.annotations@AAAAAAFxcAHJqXvRiiE= >>
     // ----------- >>
@@ -30,14 +30,14 @@ public class Work {
     // ----------- >>
     protected float suppliersPrice;
     
+    /**
+     * The number of points a customer earns after buying the work
+     */
     protected int loyaltyPoints;
 
     /**
     * In percent
     */
-
-    // ----------- << attribute.annotations@AAAAAAFxcAMcH3v0hPg= >>
-    // ----------- >>
     protected int margin;
 
     public String getTitle() {
