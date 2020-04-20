@@ -30,6 +30,8 @@ public class Work {
     // ----------- >>
     protected float suppliersPrice;
     
+    public int inStock;
+    
     /**
      * The number of points a customer earns after buying the work
      */
@@ -61,11 +63,12 @@ public class Work {
     }
 
 
+
     // ----------- << method.annotations@AAAAAAFxcAK9gnvtmGg= >>
     // ----------- >>
     public float getSellingPrice() {
     // ----------- << method.body@AAAAAAFxcAK9gnvtmGg= >>
-    	return (this.margin / 100f) * this.suppliersPrice;
+    	return ((100 + this.margin) / 100f) * this.suppliersPrice;
     // ----------- >>
     }
     
@@ -78,11 +81,12 @@ public class Work {
 
     // ----------- << method.annotations@AAAAAAFxcAa2YnySkT0= >>
     // ----------- >>
-    public Work(String title, String publisher, int publishingYear, float suppliersPrice) {
+    public Work(String title, String publisher, int publishingYear, float suppliersPrice, int inStock) {
     	this.title = title;
     	this.publisher = publisher;
     	this.publishingYear = publishingYear;
     	this.suppliersPrice = suppliersPrice;
+    	this.inStock = inStock;
     }
     
     

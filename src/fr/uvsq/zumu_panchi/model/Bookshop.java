@@ -18,23 +18,27 @@ import java.util.Set;
 public class Bookshop {
     // ----------- << attribute.annotations@AAAAAAFxcn3FgB5TipY= >>
     // ----------- >>
-    private Map<Work, Integer> stocks;
+    private Map<String, Work> stocks;
 
-    public Map<Work, Integer> getStocks() {
+    public Map<String, Work> getStocks() {
         return stocks;
     }
 
     public Bookshop() {
-        stocks = new HashMap<Work, Integer>();
+        stocks = new HashMap<String, Work>();
 
-        stocks.put(new ComicBook("Hokuto no Ken", "Shueisha", 1983, 6.0f, "Tetsuo Hara"), 2);
-        stocks.put(new ComicBook("JoJo's Bizarre Adventure", "Shueisha", 1986, 7.2f, "Hirohiko Araki"), 2);
-        stocks.put(new ComicBook("20th Century Boys", "Shogakukan", 2000, 4.5f, "Naoki Urasawa"), 23);
-        stocks.put(new ComicBook("Berserk", "Hakusensha", 1997, 9.3f, "Kentaro Miura"), 5);
+        stocks.put("Hokuto no Ken", new ComicBook("Hokuto no Ken", "Shueisha", 1983, 6.0f, 2, "Tetsuo Hara"));
+        stocks.put("JoJo's Bizarre Adventure", new ComicBook("JoJo's Bizarre Adventure", "Shueisha", 1986, 7.2f, 2, "Hirohiko Araki"));
+        stocks.put("20th Century Boys", new ComicBook("20th Century Boys", "Shogakukan", 2000, 4.5f, 23, "Naoki Urasawa"));
+        stocks.put("Berserk", new ComicBook("Berserk", "Hakusensha", 1997, 9.3f, 5, "Kentaro Miura"));
+        stocks.put("Avatar", new Book("Avatar", "Michel Lévy", 1856, 19.0f, 1, "Théophile Gautier"));
     }
 
-    public void diminishStockFor(Book bookStockToDiminish) {
-        this.stocks.replace(bookStockToDiminish, this.stocks.get(bookStockToDiminish) - 1);
+    public void diminishStockFor(String bookStockToDiminish) {
+        Work book = this.stocks.get(bookStockToDiminish);
+        book.inStock--;
+        
+        this.stocks.replace(bookStockToDiminish, book);
     }
 
     public Object[][] getArray() {
@@ -46,17 +50,13 @@ public class Bookshop {
         while (entriesIterator.hasNext()) {
 
             Map.Entry mapping = (Map.Entry) entriesIterator.next();
-            Work b = (Work) mapping.getKey();
-            /*
-             * if (mapping.getKey() instanceof ComicBook) ComicBook b = (ComicBook)
-             * mapping.getKey(); else Book b = (Book) mapping.getKey();
-             */
-
+            Work b = (Work) mapping.getValue();
+            
             arr[i][0] = b.title;
             arr[i][1] = b.publisher;
             arr[i][2] = b.publishingYear;
             arr[i][3] = String.format("%.2f", b.getSellingPrice()) + " €";
-            arr[i][4] = mapping.getValue();
+            arr[i][4] = b.inStock;
 
             i++;
         }
@@ -69,7 +69,6 @@ public class Bookshop {
         infos = new String[5];
 
         infos[0] = "Title";
-        // infos[1] = "Author";
         infos[1] = "Publisher";
         infos[2] = "Publishing Year";
         infos[3] = "Price";
