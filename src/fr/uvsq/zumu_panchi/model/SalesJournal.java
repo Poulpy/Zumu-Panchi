@@ -24,6 +24,10 @@ public class SalesJournal {
     public void setCarts(ArrayList<Cart> carts) {
         this.carts = carts;
     }
+    
+    public void addCart(Cart cartToAdd) {
+    	carts.add(cartToAdd);
+    }
 
 // ----------- << class.extras@AAAAAAFxcAwF4H0SpGc= >>
 // ----------- >>

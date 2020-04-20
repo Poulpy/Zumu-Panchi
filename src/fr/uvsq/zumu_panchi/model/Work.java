@@ -103,6 +103,11 @@ public class Work {
     	this.publishingYear = publishingYear;
     	this.suppliersPrice = suppliersPrice;
     }
+    
+    
+    public String toString() {
+    	return this.title + " " + this.publisher + " " + this.publishingYear;
+    }
 // ----------- << class.extras@AAAAAAFxcAF+1nunV8E= >>
 // ----------- >>
 }

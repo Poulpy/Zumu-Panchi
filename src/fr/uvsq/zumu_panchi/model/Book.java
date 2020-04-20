@@ -16,14 +16,10 @@ package fr.uvsq.zumu_panchi.model;
 public class Book extends Work {
     // ----------- << attribute.annotations@AAAAAAFxcAQhRXwnkVA= >>
     // ----------- >>
-    String author;
+    private String author;
 
     public String getAuthor() {
         return author;
-    }
-
-    public void setAuthor(String author) {
-        this.author = author;
     }
 
     /**
@@ -35,9 +31,10 @@ public class Book extends Work {
 
     // ----------- << method.annotations@AAAAAAFxcAfiJXytv1c= >>
     // ----------- >>
-    public Book(String title, String publisher, int publishingYear, float suppliersPrice) {
+    public Book(String title, String publisher, int publishingYear, float suppliersPrice, String author) {
     // ----------- << method.body@AAAAAAFxcAfiJXytv1c= >>
     	super(title, publisher, publishingYear, suppliersPrice);
+    	this.author = author;
     	this.margin = 20;
     	this.loyaltyPoints = 30;
     // ----------- >>

@@ -16,11 +16,11 @@ package fr.uvsq.zumu_panchi.model;
 public class ComicBook extends Work {
     // ----------- << attribute.annotations@AAAAAAFxcAWK3nxiOZg= >>
     // ----------- >>
-    String scriptwriter;
+    private String scriptwriter;
 
     // ----------- << attribute.annotations@AAAAAAFxcAXjbHxpUV4= >>
     // ----------- >>
-    String cartoonist;
+    private String cartoonist;
 
     public String getScriptwriter() {
         return scriptwriter;
@@ -30,13 +30,6 @@ public class ComicBook extends Work {
         return cartoonist;
     }
 
-    public void setScriptwriter(String scriptwriter) {
-        this.scriptwriter = scriptwriter;
-    }
-
-    public void setCartoonist(String cartoonist) {
-        this.cartoonist = cartoonist;
-    }
 
     /**
     * @param title 
@@ -47,11 +40,19 @@ public class ComicBook extends Work {
 
     // ----------- << method.annotations@AAAAAAFxcAg513y+eRk= >>
     // ----------- >>
-    public ComicBook(String title, String publisher, int publishingYear, float suppliersPrice) {
+    public ComicBook(String title, String publisher, int publishingYear, float suppliersPrice, String cartoonist, String scriptwriter) {
     // ----------- << method.body@AAAAAAFxcAg513y+eRk= >>
     	super(title, publisher, publishingYear, suppliersPrice);
+    	this.cartoonist = cartoonist;
+    	this.scriptwriter = scriptwriter;
     	this.margin = 40;
     	this.loyaltyPoints = 50;
+    // ----------- >>
+    }
+    
+    public ComicBook(String title, String publisher, int publishingYear, float suppliersPrice, String author) {
+    // ----------- << method.body@AAAAAAFxcAg513y+eRk= >>
+    	this(title, publisher, publishingYear, suppliersPrice, author, author);
     // ----------- >>
     }
 // ----------- << class.extras@AAAAAAFxcAVexXw4F+c= >>

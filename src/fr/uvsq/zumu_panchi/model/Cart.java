@@ -20,7 +20,11 @@ public class Cart {
 	ArrayList<Book> getBooks() {
 		return books;
 	}
-
+	
+	public Cart(ArrayList<Book> books) {
+		this.books = books;
+	}
+	
 	public void setBooks(ArrayList<Book> books) {
 		this.books = books;
 	}

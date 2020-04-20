@@ -13,20 +13,18 @@ public class Master extends JFrame {
 	public Master() {
 		super(TITLE);
 		setSize(WIDTH, HEIGHT);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-        
-        JTabbedPane tabbedPane = new JTabbedPane();
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-        JComponent panel1 = new OrderPane();
-        tabbedPane.addTab("Tab 1", panel1);
+		JTabbedPane tabbedPane = new JTabbedPane();
 
-        JComponent panel2 = new SalesPane();
-        tabbedPane.addTab("Tab 2", panel2);
-        this.add(tabbedPane);
-        
+		JComponent panel1 = new OrderPane();
+		tabbedPane.addTab("Order", panel1);
 
-        
-        
-        setVisible(true);
+		JComponent panel2 = new SalesPane();
+		tabbedPane.addTab("Sales", panel2);
+
+		this.add(tabbedPane);
+
+		setVisible(true);
 	}
 }
