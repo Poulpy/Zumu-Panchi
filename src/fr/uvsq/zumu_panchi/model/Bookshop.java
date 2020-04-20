@@ -18,14 +18,10 @@ import java.util.Set;
 public class Bookshop {
     // ----------- << attribute.annotations@AAAAAAFxcn3FgB5TipY= >>
     // ----------- >>
-    Map<Work, Integer> stocks;
+    private Map<Work, Integer> stocks;
 
     public Map<Work, Integer> getStocks() {
         return stocks;
-    }
-
-    public void setStocks(Map<Work, Integer> stocks) {
-        this.stocks = stocks;
     }
 
     public Bookshop() {

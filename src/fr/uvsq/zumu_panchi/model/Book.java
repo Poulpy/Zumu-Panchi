@@ -21,7 +21,7 @@ public class Book extends Work {
     public String getAuthor() {
         return author;
     }
-
+    
     /**
     * @param title 
     * @param publisher 

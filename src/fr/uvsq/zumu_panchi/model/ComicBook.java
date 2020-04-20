@@ -21,6 +21,8 @@ public class ComicBook extends Work {
     // ----------- << attribute.annotations@AAAAAAFxcAXjbHxpUV4= >>
     // ----------- >>
     private String cartoonist;
+    
+
 
     public String getScriptwriter() {
         return scriptwriter;
@@ -45,7 +47,7 @@ public class ComicBook extends Work {
     	super(title, publisher, publishingYear, suppliersPrice);
     	this.cartoonist = cartoonist;
     	this.scriptwriter = scriptwriter;
-    	this.margin = 40;
+    	this.margin = 50;
     	this.loyaltyPoints = 50;
     // ----------- >>
     }

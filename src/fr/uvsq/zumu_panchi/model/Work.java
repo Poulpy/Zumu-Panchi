@@ -60,25 +60,6 @@ public class Work {
         return margin;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public void setPublisher(String publisher) {
-        this.publisher = publisher;
-    }
-
-    public void setPublishingYear(int publishingYear) {
-        this.publishingYear = publishingYear;
-    }
-
-    public void setSuppliersPrice(int suppliersPrice) {
-        this.suppliersPrice = suppliersPrice;
-    }
-
-    public void setMargin(int margin) {
-        this.margin = margin;
-    }
 
     // ----------- << method.annotations@AAAAAAFxcAK9gnvtmGg= >>
     // ----------- >>
