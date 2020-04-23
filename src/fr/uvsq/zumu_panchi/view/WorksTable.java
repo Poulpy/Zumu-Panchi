@@ -10,7 +10,7 @@ import fr.uvsq.zumu_panchi.model.Bookshop;
 @SuppressWarnings("serial")
 public class WorksTable extends AbstractTableModel {
 
-    private final List<String[]> datas;
+    private List<String[]> datas;
 
     private final String[] headers;
 
@@ -39,6 +39,10 @@ public class WorksTable extends AbstractTableModel {
     
     public String getColumnName(int columnIndex) {
         return this.headers[columnIndex];
+    }
+    
+    public void update(Bookshop newBookshop) {
+        this.datas = newBookshop.getList();
     }
 
     public void removeRow(int row) {

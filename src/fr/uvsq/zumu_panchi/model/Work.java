@@ -14,23 +14,16 @@ package fr.uvsq.zumu_panchi.model;
  *
  */
 public class Work {
-    // ----------- << attribute.annotations@AAAAAAFxcAHJqXvRiiE= >>
-    // ----------- >>
+    
     protected String title;
 
-    // ----------- << attribute.annotations@AAAAAAFxcAIkonvYevo= >>
-    // ----------- >>
     protected String publisher;
 
-    // ----------- << attribute.annotations@AAAAAAFxcAJKaXvf4Q0= >>
-    // ----------- >>
     protected int publishingYear;
 
-    // ----------- << attribute.annotations@AAAAAAFxcAJ7+HvmPC4= >>
-    // ----------- >>
     protected float suppliersPrice;
     
-    public int inStock;
+    private int stock;
     
     /**
      * The number of points a customer earns after buying the work
@@ -41,6 +34,25 @@ public class Work {
     * In percent
     */
     protected int margin;
+    
+    public int getStock() {
+        return this.stock;
+    }
+    
+    public void decreaseStockBy(int decrease) {
+        if (this.stock >= decrease) {
+            this.stock -= decrease;
+        }
+    }
+    
+    /**
+     * Decrease the stock by one
+     */
+    public void decreaseStock() {
+        if (this.stock > 0) {
+            this.stock--;
+        }
+    }
 
     public String getTitle() {
         return title;
@@ -86,7 +98,7 @@ public class Work {
     	this.publisher = publisher;
     	this.publishingYear = publishingYear;
     	this.suppliersPrice = suppliersPrice;
-    	this.inStock = inStock;
+    	this.stock = inStock;
     }
     
     public String[] toStringArray() {
@@ -98,7 +110,7 @@ public class Work {
         str[1] = this.publisher;
         str[2] = String.valueOf(this.publishingYear);
         str[3] = String.format("%.2f", this.getSellingPrice()) + " €";
-        str[4] = String.valueOf(this.inStock);
+        str[4] = String.valueOf(this.stock);
         
         return str;
     }

@@ -43,13 +43,13 @@ public class Bookshop {
     
     public void diminishStockFor(Cart cart) {
         for (Work work : cart.getBooks()) {
-            this.diminishStockFor(work.title);
+            this.decreaseStock(work.title);
         }
     }
 
-    public void diminishStockFor(String bookStockToDiminish) {
+    public void decreaseStock(String bookStockToDiminish) {
         Work book = this.stocks.get(bookStockToDiminish);
-        book.inStock--;
+        book.decreaseStock();
         
         this.stocks.replace(bookStockToDiminish, book);
     }
@@ -87,7 +87,7 @@ public class Bookshop {
             arr[i][1] = b.publisher;
             arr[i][2] = b.publishingYear;
             arr[i][3] = String.format("%.2f", b.getSellingPrice()) + " €";
-            arr[i][4] = b.inStock;
+            arr[i][4] = b.getStock();
 
             i++;
         }
