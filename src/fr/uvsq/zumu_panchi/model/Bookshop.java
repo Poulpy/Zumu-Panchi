@@ -12,20 +12,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-// ----------- << imports@AAAAAAFxcn2wxx4p7L4= >>
-// ----------- >>
-
-// ----------- << class.annotations@AAAAAAFxcn2wxx4p7L4= >>
-// ----------- >>
 public class Bookshop {
-    // ----------- << attribute.annotations@AAAAAAFxcn3FgB5TipY= >>
-    // ----------- >>
+
     private Map<String, Work> stocks;
 
     public Map<String, Work> getStocks() {
         return stocks;
     }
-    
+
     public Work getWork(String work) {
         return this.stocks.get(work);
     }
@@ -35,28 +29,17 @@ public class Bookshop {
 
         // TODO put in CSV ?
         stocks.put("Hokuto no Ken", new ComicBook("Hokuto no Ken", "Shueisha", 1983, 6.0f, 2, "Tetsuo Hara"));
-        stocks.put("JoJo's Bizarre Adventure", new ComicBook("JoJo's Bizarre Adventure", "Shueisha", 1986, 7.2f, 2, "Hirohiko Araki"));
-        stocks.put("20th Century Boys", new ComicBook("20th Century Boys", "Shogakukan", 2000, 4.5f, 23, "Naoki Urasawa"));
+        stocks.put("JoJo's Bizarre Adventure",
+                new ComicBook("JoJo's Bizarre Adventure", "Shueisha", 1986, 7.2f, 2, "Hirohiko Araki"));
+        stocks.put("20th Century Boys",
+                new ComicBook("20th Century Boys", "Shogakukan", 2000, 4.5f, 23, "Naoki Urasawa"));
         stocks.put("Berserk", new ComicBook("Berserk", "Hakusensha", 1997, 9.3f, 5, "Kentaro Miura"));
         stocks.put("Avatar", new Book("Avatar", "Michel Lévy", 1856, 19.0f, 1, "Théophile Gautier"));
     }
-    
-    public void diminishStockFor(Cart cart) {
-        for (Work work : cart.getBooks()) {
-            this.decreaseStock(work.title);
-        }
-    }
 
-    public void decreaseStock(String bookStockToDiminish) {
-        Work book = this.stocks.get(bookStockToDiminish);
-        book.decreaseStock();
-        
-        this.stocks.replace(bookStockToDiminish, book);
-    }
-    
     public List<String[]> getList() {
         List<String[]> list;
-        
+
         list = new ArrayList<String[]>();
         Set entries = stocks.entrySet();
         Iterator entriesIterator = entries.iterator();
@@ -64,35 +47,11 @@ public class Bookshop {
         while (entriesIterator.hasNext()) {
             Map.Entry mapping = (Map.Entry) entriesIterator.next();
             Work b = (Work) mapping.getValue();
-            
+
             list.add(b.toStringArray());
         }
-        
+
         return list;
-    }
-    
-
-    public Object[][] getArray() {
-        Object[][] arr = new Object[stocks.size()][6];
-        Set entries = stocks.entrySet();
-        Iterator entriesIterator = entries.iterator();
-
-        int i = 0;
-        while (entriesIterator.hasNext()) {
-
-            Map.Entry mapping = (Map.Entry) entriesIterator.next();
-            Work b = (Work) mapping.getValue();
-            
-            arr[i][0] = b.title;
-            arr[i][1] = b.publisher;
-            arr[i][2] = b.publishingYear;
-            arr[i][3] = String.format("%.2f", b.getSellingPrice()) + " €";
-            arr[i][4] = b.getStock();
-
-            i++;
-        }
-
-        return arr;
     }
 
     public String[] getInformations() {
@@ -107,10 +66,15 @@ public class Bookshop {
 
         return infos;
     }
-// ----------- << class.extras@AAAAAAFxcn2wxx4p7L4= >>
-// ----------- >>
 
     public void increaseStock(String title) {
         this.stocks.get(title).increaseStock();
+    }
+
+    public void decreaseStock(String bookStockToDiminish) {
+        Work book = this.stocks.get(bookStockToDiminish);
+        book.decreaseStock();
+
+        this.stocks.replace(bookStockToDiminish, book);
     }
 }
