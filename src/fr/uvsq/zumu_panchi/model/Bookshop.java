@@ -109,4 +109,8 @@ public class Bookshop {
     }
 // ----------- << class.extras@AAAAAAFxcn2wxx4p7L4= >>
 // ----------- >>
+
+    public void increaseStock(String title) {
+        this.stocks.get(title).increaseStock();
+    }
 }

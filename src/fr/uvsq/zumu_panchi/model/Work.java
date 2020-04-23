@@ -45,6 +45,10 @@ public class Work {
         }
     }
     
+    public void increaseStock() {
+        this.stock++;
+    }
+    
     /**
      * Decrease the stock by one
      */

@@ -42,7 +42,10 @@ public class OrderPane extends JPanel implements ActionListener, MouseListener {
 
         cartListModel = new DefaultListModel<String>();
         cartList = new JList<String>(cartListModel);
+        cartList.addMouseListener(this);
         JScrollPane listScroller = new JScrollPane(cartList);
+        
+        
         orderCartButton = new JButton("Order");
 
         this.add(title);
@@ -71,14 +74,38 @@ public class OrderPane extends JPanel implements ActionListener, MouseListener {
         modelTable.update(bookshop);
         modelTable.fireTableDataChanged();
     }
+    
+    
+    private void removeItemFromCart(int indexOfitemToRemove) {
+        String itemToRemove = this.cartList.getSelectedValue();
+        
+        Work work = this.bookshop.getWork(itemToRemove);
+
+
+        this.bookshop.increaseStock(work.getTitle());
+        cart.removeItemToCart(work);
+
+        modelTable.update(bookshop);
+        modelTable.fireTableDataChanged();
+        cartListModel.remove(indexOfitemToRemove);
+    }
 
     @Override
     public void mouseClicked(MouseEvent e) {
         if (e.getClickCount() == 1) {
+            
+            // Add to cart
             if (e.getSource() == this.table) {
                 int row = table.getSelectedRow();
                 int column = table.getSelectedColumn();
                 this.addElementToCart(row, column);
+                
+            // Remove from cart
+            } else if (e.getSource() == this.cartList) {
+                int index = cartList.locationToIndex(e.getPoint());
+                
+                this.removeItemFromCart(index);
+                
             }
         }
 

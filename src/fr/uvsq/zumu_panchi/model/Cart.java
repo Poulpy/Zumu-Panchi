@@ -50,4 +50,8 @@ public class Cart {
 
         return totalPoints;
     }
+
+    public void removeItemToCart(Work work) {
+        this.works.remove(work);
+    }
 }
