@@ -1,6 +1,8 @@
 package fr.uvsq.zumu_panchi.view;
 
 
+import java.util.List;
+
 import javax.swing.table.AbstractTableModel;
 
 import fr.uvsq.zumu_panchi.model.Bookshop;
@@ -8,7 +10,7 @@ import fr.uvsq.zumu_panchi.model.Bookshop;
 @SuppressWarnings("serial")
 public class WorksTable extends AbstractTableModel {
 
-    private final Object[][] datas;
+    private final List<String[]> datas;
 
     private final String[] headers;
 
@@ -16,12 +18,13 @@ public class WorksTable extends AbstractTableModel {
         super();
 
         headers = bookshop.getInformations();
-        datas = bookshop.getArray();
+        datas = bookshop.getList();
+        
     }
 
     @Override
     public int getRowCount() {
-        return datas.length;
+        return datas.size();
     }
 
     @Override
@@ -31,12 +34,22 @@ public class WorksTable extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        // TODO Auto-generated method stub
-        return datas[rowIndex][columnIndex];
+        return datas.get(rowIndex)[columnIndex];
     }
     
     public String getColumnName(int columnIndex) {
         return this.headers[columnIndex];
     }
 
+    public void removeRow(int row) {
+        this.datas.remove(row);
+    }
+    
+    public void decreaseStock(int row) {
+        this.datas.get(row)[4] = String.valueOf(Integer.parseInt(this.datas.get(row)[4]) - 1);
+    }
+    
+    public void increaseStock(int row) {
+        this.datas.get(row)[4] = String.valueOf(Integer.parseInt(this.datas.get(row)[4]) + 1);
+    }
 }

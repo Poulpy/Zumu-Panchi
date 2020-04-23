@@ -7,7 +7,7 @@ import javax.swing.JTabbedPane;
 @SuppressWarnings("serial")
 public class Master extends JFrame {
 	final int HEIGHT = 500;
-	final int WIDTH = 600;
+	final int WIDTH = 1200;
 	final static String TITLE = "Zumu Panchi";
 
 	public Master() {

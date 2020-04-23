@@ -5,8 +5,10 @@
 */
 package fr.uvsq.zumu_panchi.model;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -51,6 +53,24 @@ public class Bookshop {
         
         this.stocks.replace(bookStockToDiminish, book);
     }
+    
+    public List<String[]> getList() {
+        List<String[]> list;
+        
+        list = new ArrayList<String[]>();
+        Set entries = stocks.entrySet();
+        Iterator entriesIterator = entries.iterator();
+
+        while (entriesIterator.hasNext()) {
+            Map.Entry mapping = (Map.Entry) entriesIterator.next();
+            Work b = (Work) mapping.getValue();
+            
+            list.add(b.toStringArray());
+        }
+        
+        return list;
+    }
+    
 
     public Object[][] getArray() {
         Object[][] arr = new Object[stocks.size()][6];

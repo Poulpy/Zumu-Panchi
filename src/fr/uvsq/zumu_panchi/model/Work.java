@@ -89,6 +89,20 @@ public class Work {
     	this.inStock = inStock;
     }
     
+    public String[] toStringArray() {
+        String[] str;
+        
+        str = new String[5];
+        
+        str[0] = this.title;
+        str[1] = this.publisher;
+        str[2] = String.valueOf(this.publishingYear);
+        str[3] = String.format("%.2f", this.getSellingPrice()) + " €";
+        str[4] = String.valueOf(this.inStock);
+        
+        return str;
+    }
+    
     
     public String toString() {
     	return this.title + " " + this.publisher + " " + this.publishingYear;
