@@ -13,6 +13,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
+import fr.uvsq.zumu_panchi.controller.BookshopController;
 import fr.uvsq.zumu_panchi.model.Bookshop;
 import fr.uvsq.zumu_panchi.model.Cart;
 import fr.uvsq.zumu_panchi.model.Work;
@@ -21,32 +22,43 @@ import fr.uvsq.zumu_panchi.model.Work;
 public class OrderPane extends JPanel implements ActionListener, MouseListener {
 
     private WorksTable modelTable;
+    public WorksTable getModelTable() {
+        return modelTable;
+    }
+
     private JTable table;
     private Bookshop bookshop;
     private JList<String> cartList;
     private JButton orderCartButton;
     private DefaultListModel<String> cartListModel;
+    public DefaultListModel<String> getCartListModel() {
+        return cartListModel;
+    }
+
     private Cart cart;
+    private BookshopController bookshopController;
 
     public OrderPane() {
         JLabel title;
         this.cart = new Cart();
 
         this.bookshop = new Bookshop();
+        this.bookshopController = new BookshopController(this.bookshop, this.cart, this);
 
         title = new JLabel("Order");
 
         this.modelTable = new WorksTable(this.bookshop);
         this.table = new JTable(this.modelTable);
-        this.table.addMouseListener(this);
+        this.table.addMouseListener(bookshopController);
 
         cartListModel = new DefaultListModel<String>();
         cartList = new JList<String>(cartListModel);
-        cartList.addMouseListener(this);
+        cartList.addMouseListener(bookshopController);
         JScrollPane listScroller = new JScrollPane(cartList);
         
         
         orderCartButton = new JButton("Order");
+        orderCartButton.addActionListener(bookshopController);
 
         this.add(title);
         this.add(new JScrollPane(this.table));
@@ -59,55 +71,9 @@ public class OrderPane extends JPanel implements ActionListener, MouseListener {
 
     }
 
-    private void addElementToCart(int row, int col) {
-        Work work = this.bookshop.getWork((String) table.getValueAt(row, 0));
-
-        if (work.getStock() == 0) {
-            System.out.println("No stocks available !");
-            return;
-        }
-
-        this.bookshop.decreaseStock(work.getTitle());
-        cart.addItemToCart(work);
-        cartListModel.addElement(work.getTitle());
-
-        modelTable.update(bookshop);
-        modelTable.fireTableDataChanged();
-    }
-    
-    
-    private void removeItemFromCart(int indexOfitemToRemove) {
-        String itemToRemove = this.cartList.getSelectedValue();
-        
-        Work work = this.bookshop.getWork(itemToRemove);
-
-
-        this.bookshop.increaseStock(work.getTitle());
-        cart.removeItemToCart(work);
-
-        modelTable.update(bookshop);
-        modelTable.fireTableDataChanged();
-        cartListModel.remove(indexOfitemToRemove);
-    }
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        if (e.getClickCount() == 1) {
-            
-            // Add to cart
-            if (e.getSource() == this.table) {
-                int row = table.getSelectedRow();
-                int column = table.getSelectedColumn();
-                this.addElementToCart(row, column);
-                
-            // Remove from cart
-            } else if (e.getSource() == this.cartList) {
-                int index = cartList.locationToIndex(e.getPoint());
-                
-                this.removeItemFromCart(index);
-                
-            }
-        }
 
     }
 
@@ -133,5 +99,13 @@ public class OrderPane extends JPanel implements ActionListener, MouseListener {
     public void mouseExited(MouseEvent e) {
         // TODO Auto-generated method stub
 
+    }
+    
+    public JTable getTable() {
+        return this.table;
+    }
+    
+    public JList getCartList() {
+        return this.cartList;
     }
 }
