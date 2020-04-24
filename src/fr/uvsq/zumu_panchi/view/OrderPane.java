@@ -1,5 +1,6 @@
 package fr.uvsq.zumu_panchi.view;
 
+import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -60,6 +61,7 @@ public class OrderPane extends JPanel {
         this.bookshopController = new BookshopController(this.bookshop, this.cart, this);
 
         title = new JLabel("Order");
+        title.setFont(new Font("Calibri", Font.BOLD, 30));
 
         // bookshop
         this.modelTable = new WorksTable(this.bookshop);
