@@ -1,5 +1,9 @@
 package fr.uvsq.zumu_panchi.view;
 
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -45,6 +49,10 @@ public class OrderPane extends JPanel {
     private BookshopController bookshopController;
 
     public OrderPane() {
+        super();
+        this.setLayout(new GridBagLayout());
+
+        
         JLabel title;
         this.cart = new Cart();
 
@@ -56,22 +64,47 @@ public class OrderPane extends JPanel {
         // bookshop
         this.modelTable = new WorksTable(this.bookshop);
         this.table = new JTable(this.modelTable);
+        this.table.setRowHeight(30);
+        table.getColumnModel().getColumn(2).setPreferredWidth(10);
+        table.getColumnModel().getColumn(3).setPreferredWidth(5);
+        table.getColumnModel().getColumn(4).setPreferredWidth(5);
         this.table.addMouseListener(bookshopController);
 
         // cart
         cartListModel = new DefaultListModel<String>();
         cartList = new JList<String>(cartListModel);
+        cartList.setLayoutOrientation(JList.HORIZONTAL_WRAP);
+        
         cartList.addMouseListener(bookshopController);
         JScrollPane listScroller = new JScrollPane(cartList);
 
         // Order button
         orderCartButton = new JButton("Order");
         orderCartButton.addActionListener(bookshopController);
-
-        this.add(title);
-        this.add(new JScrollPane(this.table));
-        this.add(listScroller);
-        this.add(orderCartButton);
+        
+        GridBagConstraints c = new GridBagConstraints();
+        c.insets = new Insets(6, 6, 6, 6);
+        
+        c.anchor = GridBagConstraints.WEST;
+        c.weightx = 1.0;
+        c.gridx = 0;
+        c.gridy = 0;
+        this.add(title, c);
+        
+        c.gridy = 1;
+        c.fill = GridBagConstraints.BOTH;
+        c.weighty = 4.0;
+        c.weightx = 7.0;
+        this.add(new JScrollPane(this.table), c);
+        
+        c.weightx = 2.0;
+        c.gridx = 1;
+        this.add(listScroller, c);
+        
+        c.gridx = 2;
+        c.weightx = 1.0;
+        c.fill = GridBagConstraints.NONE;
+        this.add(orderCartButton, c);
     }
 
     public JTable getTable() {

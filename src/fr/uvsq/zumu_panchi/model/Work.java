@@ -69,7 +69,7 @@ public class Work {
         
         if (inStock >= 0)
             this.stock = inStock;
-        else
+        else // TODO Exception handling
             this.stock = 0;
     }
 

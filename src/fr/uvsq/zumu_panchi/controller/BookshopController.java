@@ -35,6 +35,7 @@ public class BookshopController implements MouseListener, ActionListener {
         Work work = this.bookshop.getWork((String) table.getValueAt(row, 0));
 
         if (work.getStock() == 0) {
+            // TODO Exception handling
             System.out.println("No stocks available !");
             return;
         }
