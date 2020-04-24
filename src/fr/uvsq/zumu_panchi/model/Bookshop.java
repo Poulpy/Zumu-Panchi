@@ -10,19 +10,21 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 
+/**
+ * Class that stores the books, along with the stock number
+ * 
+ * @author paul
+ *
+ */
 public class Bookshop {
 
+    /**
+     * Stores the book with the title of the book as a key
+     */
     private Map<String, Work> stocks;
-
-    public Map<String, Work> getStocks() {
-        return stocks;
-    }
-
-    public Work getWork(String work) {
-        return this.stocks.get(work);
-    }
 
     public Bookshop() {
         stocks = new HashMap<String, Work>();
@@ -37,12 +39,18 @@ public class Bookshop {
         stocks.put("Avatar", new Book("Avatar", "Michel Lévy", 1856, 19.0f, 1, "Théophile Gautier"));
     }
 
+    /**
+     * Return the books as a list of string arrays: it's for the model table
+     * (JTable)
+     * 
+     * @return
+     */
     public List<String[]> getList() {
         List<String[]> list;
 
         list = new ArrayList<String[]>();
-        Set entries = stocks.entrySet();
-        Iterator entriesIterator = entries.iterator();
+        Set<Map.Entry<String, Work>> entries = stocks.entrySet();
+        Iterator<Entry<String, Work>> entriesIterator = entries.iterator();
 
         while (entriesIterator.hasNext()) {
             Map.Entry mapping = (Map.Entry) entriesIterator.next();
@@ -54,6 +62,11 @@ public class Bookshop {
         return list;
     }
 
+    /**
+     * For the header of the model table (JTable)
+     * 
+     * @return
+     */
     public String[] getInformations() {
         String infos[];
         infos = new String[5];
@@ -67,14 +80,32 @@ public class Bookshop {
         return infos;
     }
 
+    /**
+     * Increase the stock of a book by one
+     * 
+     * @param title
+     */
     public void increaseStock(String title) {
         this.stocks.get(title).increaseStock();
     }
 
+    /**
+     * Decrease the stock of a book by one
+     * 
+     * @param bookStockToDiminish
+     */
     public void decreaseStock(String bookStockToDiminish) {
         Work book = this.stocks.get(bookStockToDiminish);
         book.decreaseStock();
 
         this.stocks.replace(bookStockToDiminish, book);
+    }
+
+    public Map<String, Work> getStocks() {
+        return stocks;
+    }
+
+    public Work getWork(String work) {
+        return this.stocks.get(work);
     }
 }

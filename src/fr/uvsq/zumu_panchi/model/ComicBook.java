@@ -6,7 +6,7 @@
 package fr.uvsq.zumu_panchi.model;
 
 /**
- * and a cartoonist
+ * It's a book, with drawings
  * 
  * @author paul
  *
@@ -23,22 +23,14 @@ public class ComicBook extends Work {
      */
     private String cartoonist;
 
-    public String getScriptwriter() {
-        return scriptwriter;
-    }
-
-    public String getCartoonist() {
-        return cartoonist;
-    }
-
     /**
      * @param title
      * @param publisher
      * @param publishingYear
      * @param suppliersPrice
      */
-    public ComicBook(String title, String publisher, int publishingYear, float suppliersPrice, int inStock, String cartoonist,
-            String scriptwriter) {
+    public ComicBook(String title, String publisher, int publishingYear, float suppliersPrice, int inStock,
+            String cartoonist, String scriptwriter) {
         super(title, publisher, publishingYear, suppliersPrice, inStock);
 
         this.cartoonist = cartoonist;
@@ -47,7 +39,16 @@ public class ComicBook extends Work {
         this.loyaltyPoints = 50;
     }
 
-    public ComicBook(String title, String publisher, int publishingYear, float suppliersPrice, int inStock, String author) {
+    public ComicBook(String title, String publisher, int publishingYear, float suppliersPrice, int inStock,
+            String author) {
         this(title, publisher, publishingYear, suppliersPrice, inStock, author, author);
+    }
+
+    public String getScriptwriter() {
+        return scriptwriter;
+    }
+
+    public String getCartoonist() {
+        return cartoonist;
     }
 }

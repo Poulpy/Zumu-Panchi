@@ -10,8 +10,14 @@ import fr.uvsq.zumu_panchi.model.Bookshop;
 @SuppressWarnings("serial")
 public class WorksTable extends AbstractTableModel {
 
+    /**
+     * The datas of the table : books
+     */
     private List<String[]> datas;
 
+    /**
+     * The headers : Title | Publisher | ...
+     */
     private final String[] headers;
 
     public WorksTable(Bookshop bookshop) {
@@ -47,13 +53,5 @@ public class WorksTable extends AbstractTableModel {
 
     public void removeRow(int row) {
         this.datas.remove(row);
-    }
-    
-    public void decreaseStock(int row) {
-        this.datas.get(row)[4] = String.valueOf(Integer.parseInt(this.datas.get(row)[4]) - 1);
-    }
-    
-    public void increaseStock(int row) {
-        this.datas.get(row)[4] = String.valueOf(Integer.parseInt(this.datas.get(row)[4]) + 1);
     }
 }

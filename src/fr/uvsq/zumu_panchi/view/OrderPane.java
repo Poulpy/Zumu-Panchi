@@ -13,17 +13,35 @@ import fr.uvsq.zumu_panchi.model.Bookshop;
 import fr.uvsq.zumu_panchi.model.Cart;
 
 @SuppressWarnings("serial")
+/**
+ * The pane for the customer to make a cart, and pass an order
+ * 
+ * @author paul
+ *
+ */
 public class OrderPane extends JPanel {
 
+    /**
+     * The underlying model contaning the data of the JTable Contains the books
+     * available in the bookshop
+     */
     private WorksTable modelTable;
-
     private JTable table;
-    private Bookshop bookshop;
-    private JList<String> cartList;
-    private JButton orderCartButton;
-    private DefaultListModel<String> cartListModel;
 
+    private DefaultListModel<String> cartListModel;
+    /**
+     * Contains the books added to the cart
+     */
+    private JList<String> cartList;
+
+    /**
+     * The button for passing an order
+     */
+    private JButton orderCartButton;
+
+    private Bookshop bookshop;
     private Cart cart;
+
     private BookshopController bookshopController;
 
     public OrderPane() {
@@ -60,7 +78,7 @@ public class OrderPane extends JPanel {
         return this.table;
     }
 
-    public JList getCartList() {
+    public JList<String> getCartList() {
         return this.cartList;
     }
 

@@ -12,13 +12,11 @@ package fr.uvsq.zumu_panchi.model;
  *
  */
 public class Book extends Work {
-    // ----------- << attribute.annotations@AAAAAAFxcAQhRXwnkVA= >>
-    // ----------- >>
-    private String author;
 
-    public String getAuthor() {
-        return author;
-    }
+    /**
+     * The guy who wrote this book
+     */
+    private String author;
 
     /**
      * @param title
@@ -32,5 +30,9 @@ public class Book extends Work {
         this.author = author;
         this.margin = 20;
         this.loyaltyPoints = 30;
+    }
+
+    public String getAuthor() {
+        return author;
     }
 }
