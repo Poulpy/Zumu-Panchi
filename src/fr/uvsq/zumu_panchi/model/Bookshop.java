@@ -37,17 +37,6 @@ public class Bookshop {
 
     public Bookshop() {
         stocks = new HashMap<String, Work>();
-
-        /*
-        // TODO put in CSV ?
-        stocks.put("Hokuto no Ken", new ComicBook("Hokuto no Ken", "Shueisha", 1983, 6.0f, 2, "Tetsuo Hara"));
-        stocks.put("JoJo's Bizarre Adventure",
-                new ComicBook("JoJo's Bizarre Adventure", "Shueisha", 1986, 7.2f, 2, "Hirohiko Araki"));
-        stocks.put("20th Century Boys",
-                new ComicBook("20th Century Boys", "Shogakukan", 2000, 4.5f, 23, "Naoki Urasawa"));
-        stocks.put("Berserk", new ComicBook("Berserk", "Hakusensha", 1997, 9.3f, 5, "Kentaro Miura"));
-        stocks.put("Avatar", new Book("Avatar", "Michel Lévy", 1856, 19.0f, 1, "Théophile Gautier"));
-    */
     }
 
     /**

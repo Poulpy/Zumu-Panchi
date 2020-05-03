@@ -76,10 +76,14 @@ public class BookshopController implements MouseListener, ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == this.orderPane.getOrderCartButton()) {
             System.out.println("Order ...");
-            salesJournal.addCart(this.cart);
-            this.cart.clear();
-            this.orderPane.clearCartList();
-            this.orderPane.setCartInformations(0, 0f);
+            if (this.cart.getBooks().size() == 0) {
+                System.out.println("Cart is empty !");
+            } else {
+                salesJournal.addCart(this.cart);
+                this.cart.clear();
+                this.orderPane.clearCartList();
+                this.orderPane.setCartInformations(0, 0f);
+            }
         }
     }
 

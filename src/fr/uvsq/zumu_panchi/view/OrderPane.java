@@ -68,7 +68,7 @@ public class OrderPane extends JPanel {
         
         try {
             this.bookshop.seedBooks("resources/books.csv");
-            this.bookshop.seedComicBooks("resources/books.csv");
+            this.bookshop.seedComicBooks("resources/comic_books.csv");
         } catch (IOException e) {
             e.printStackTrace();
         }
