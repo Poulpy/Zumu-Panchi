@@ -1,5 +1,6 @@
 package fr.uvsq.zumu_panchi.view;
 
+import java.awt.Toolkit;
 import java.io.IOException;
 
 import javax.swing.JComponent;
@@ -10,6 +11,7 @@ import fr.uvsq.zumu_panchi.controller.BookshopController;
 import fr.uvsq.zumu_panchi.model.Bookshop;
 import fr.uvsq.zumu_panchi.model.Cart;
 import fr.uvsq.zumu_panchi.model.SalesJournal;
+import javafx.scene.image.Image;
 
 @SuppressWarnings("serial")
 /**
@@ -40,6 +42,7 @@ public class Master extends JFrame {
         super(TITLE);
         setSize(WIDTH, HEIGHT);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setIconImage(Toolkit.getDefaultToolkit().getImage("resources/cochon.png"));
 
         JTabbedPane tabbedPane = new JTabbedPane();
 
