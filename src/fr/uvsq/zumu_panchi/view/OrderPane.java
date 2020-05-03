@@ -4,6 +4,7 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.io.IOException;
 
 import javax.swing.BoxLayout;
 import javax.swing.DefaultListModel;
@@ -64,6 +65,14 @@ public class OrderPane extends JPanel {
         this.cart = new Cart();
 
         this.bookshop = new Bookshop();
+        
+        try {
+            this.bookshop.seedBooks("resources/books.csv");
+            this.bookshop.seedComicBooks("resources/books.csv");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        
         SalesJournal salesJournal = new SalesJournal();
         this.bookshopController = new BookshopController(this.bookshop, this.cart, salesJournal, this);
 
