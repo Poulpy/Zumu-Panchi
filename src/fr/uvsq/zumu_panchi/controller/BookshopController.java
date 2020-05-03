@@ -23,10 +23,9 @@ public class BookshopController implements MouseListener, ActionListener {
     private OrderPane orderPane;
     private SalesJournal salesJournal;
 
-    public BookshopController(Bookshop bookshop, Cart cart, SalesJournal salesJournal, OrderPane orderPane) {
+    public BookshopController(Bookshop bookshop, Cart cart, SalesJournal salesJournal) {
         this.bookshop = bookshop;
         this.cart = cart;
-        this.orderPane = orderPane;
         this.salesJournal = salesJournal;
     }
 
@@ -77,9 +76,11 @@ public class BookshopController implements MouseListener, ActionListener {
         if (e.getSource() == this.orderPane.getOrderCartButton()) {
             System.out.println("Order ...");
             if (this.cart.getBooks().size() == 0) {
+                // TODO label indicating cart is empty
                 System.out.println("Cart is empty !");
             } else {
                 salesJournal.addCart(this.cart);
+                this.orderPane.updatePointsEarned(this.cart.getLoyaltyPoints());
                 this.cart.clear();
                 this.orderPane.clearCartList();
                 this.orderPane.setCartInformations(0, 0f);
@@ -129,4 +130,19 @@ public class BookshopController implements MouseListener, ActionListener {
 
     }
 
+    public void setOrderPane(OrderPane orderPane) {
+        this.orderPane = orderPane;
+    }
+    
+    public Cart getCart() {
+        return this.cart;
+    }
+    
+    public Bookshop getBookshop() {
+        return this.bookshop;
+    }
+    
+    public SalesJournal getSalesJournal() {
+        return this.salesJournal;
+    }
 }

@@ -1,8 +1,15 @@
 package fr.uvsq.zumu_panchi.view;
 
+import java.io.IOException;
+
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JTabbedPane;
+
+import fr.uvsq.zumu_panchi.controller.BookshopController;
+import fr.uvsq.zumu_panchi.model.Bookshop;
+import fr.uvsq.zumu_panchi.model.Cart;
+import fr.uvsq.zumu_panchi.model.SalesJournal;
 
 @SuppressWarnings("serial")
 /**
@@ -36,10 +43,25 @@ public class Master extends JFrame {
 
         JTabbedPane tabbedPane = new JTabbedPane();
 
-        JComponent panel1 = new OrderPane();
+        Cart cart = new Cart();
+
+        Bookshop bookshop = new Bookshop();
+        
+        try {
+            bookshop.seedBooks("resources/books.csv");
+            bookshop.seedComicBooks("resources/comic_books.csv");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        
+        SalesJournal salesJournal = new SalesJournal();
+        BookshopController bookshopController = new BookshopController(bookshop, cart, salesJournal);
+
+        
+        JComponent panel1 = new OrderPane(bookshopController);
         tabbedPane.addTab("Order", panel1);
 
-        JComponent panel2 = new SalesPane();
+        JComponent panel2 = new SalesPane(null, null);
         tabbedPane.addTab("Sales", panel2);
 
         this.add(tabbedPane);

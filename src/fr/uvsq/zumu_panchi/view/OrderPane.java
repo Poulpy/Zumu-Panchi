@@ -55,26 +55,21 @@ public class OrderPane extends JPanel {
     private JLabel totalLoyaltyPoints;
     
     private JLabel totalPrice;
+    
+    private JLabel loyaltyPointsEarnedLabel;
 
-    public OrderPane() {
+    public OrderPane(BookshopController bookshopController) {
         super();
-        this.setLayout(new GridBagLayout());
-
+        
+        this.bookshopController = bookshopController;
+        this.cart = bookshopController.getCart();
+        this.bookshop = bookshopController.getBookshop();
+        this.bookshopController.setOrderPane(this);
         
         JLabel title;
-        this.cart = new Cart();
+        
+        this.setLayout(new GridBagLayout());
 
-        this.bookshop = new Bookshop();
-        
-        try {
-            this.bookshop.seedBooks("resources/books.csv");
-            this.bookshop.seedComicBooks("resources/comic_books.csv");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        
-        SalesJournal salesJournal = new SalesJournal();
-        this.bookshopController = new BookshopController(this.bookshop, this.cart, salesJournal, this);
 
         title = new JLabel("Order");
         title.setFont(new Font("Calibri", Font.BOLD, 30));
@@ -91,7 +86,7 @@ public class OrderPane extends JPanel {
         // cart
         cartListModel = new DefaultListModel<String>();
         cartList = new JList<String>(cartListModel);
-        cartList.setLayoutOrientation(JList.HORIZONTAL_WRAP);
+        cartList.setLayoutOrientation(JList.VERTICAL);
         
         cartList.addMouseListener(bookshopController);
         JScrollPane listScroller = new JScrollPane(cartList);
@@ -102,6 +97,7 @@ public class OrderPane extends JPanel {
         orderCartButton.addActionListener(bookshopController);
         totalLoyaltyPoints = new JLabel();
         totalPrice = new JLabel();
+        loyaltyPointsEarnedLabel = new JLabel("Your points    0");
         this.setCartInformations(0, 0f);
 
         
@@ -114,24 +110,26 @@ public class OrderPane extends JPanel {
         c.gridy = 0;
         this.add(title, c);
         
+        c.gridx = 2;
+        this.add(loyaltyPointsEarnedLabel, c);
+        
+        c.gridx = 0;
         c.gridy = 1;
         c.fill = GridBagConstraints.BOTH;
         c.weighty = 3.0;
-        c.weightx = 7.0;
         c.gridheight = 3;
         this.add(new JScrollPane(this.table), c);
         
-        c.weightx = 2.0;
         c.gridx = 1;
         this.add(listScroller, c);
         
+        
         c.gridx = 2;
-        c.gridy = 1;
+        c.weightx = 1.0;
         
         c.gridheight = 1;
-        c.weightx = 1.0;
+        c.gridy = 1;
         c.fill = GridBagConstraints.NONE;
-                
         this.add(totalLoyaltyPoints, c);
         
         c.gridy = 2;
@@ -167,10 +165,19 @@ public class OrderPane extends JPanel {
     }
     
     public void setCartInformations(int loyaltyPoints, float price) {
-        String loyaltyTextLabel = "Loyalty points : " + loyaltyPoints;
-        String priceTextLabel = "Total price : " + String.format("%.2f", price) + " €";
+        String loyaltyTextLabel = "Loyalty points    " + loyaltyPoints;
+        String priceTextLabel = "Total price    " + String.format("%3.2f", price) + " €";
         
         this.totalLoyaltyPoints.setText(loyaltyTextLabel);
         this.totalPrice.setText(priceTextLabel);
+    }
+
+    // TODO not flexible
+    public int getCurrentPoints() {
+        return Integer.parseInt(this.loyaltyPointsEarnedLabel.getText().split("    ")[1]);
+    }
+    
+    public void updatePointsEarned(int newPoints) {
+        this.loyaltyPointsEarnedLabel.setText("Your points    " + (getCurrentPoints() + newPoints));
     }
 }

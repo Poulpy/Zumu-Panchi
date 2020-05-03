@@ -24,9 +24,10 @@ To generate the jar run :
 
 - Show sales journal on sales tab
 - Update sales journal when ordering a cart
-- Show total loyalty points
+
 - Offer a work when user has reached 1000 points, and clear 1000 points then after
-- Put the works in a CSV
+
 - Change the model Work to Stock
-- Tests
+- Make an applet OwO
+- Change icon of app
 
