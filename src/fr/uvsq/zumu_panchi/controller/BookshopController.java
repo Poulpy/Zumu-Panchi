@@ -11,6 +11,7 @@ import javax.swing.JTable;
 
 import fr.uvsq.zumu_panchi.model.Bookshop;
 import fr.uvsq.zumu_panchi.model.Cart;
+import fr.uvsq.zumu_panchi.model.SalesJournal;
 import fr.uvsq.zumu_panchi.model.Work;
 import fr.uvsq.zumu_panchi.view.OrderPane;
 import fr.uvsq.zumu_panchi.view.WorksTable;
@@ -20,11 +21,13 @@ public class BookshopController implements MouseListener, ActionListener {
     private Bookshop bookshop;
     private Cart cart;
     private OrderPane orderPane;
+    private SalesJournal salesJournal;
 
-    public BookshopController(Bookshop bookshop, Cart cart, OrderPane orderPane) {
+    public BookshopController(Bookshop bookshop, Cart cart, SalesJournal salesJournal, OrderPane orderPane) {
         this.bookshop = bookshop;
         this.cart = cart;
         this.orderPane = orderPane;
+        this.salesJournal = salesJournal;
     }
 
     public void addElementToCart(int row, int col) {
@@ -70,6 +73,9 @@ public class BookshopController implements MouseListener, ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == this.orderPane.getOrderCartButton()) {
             System.out.println("Order ...");
+            salesJournal.addCart(this.cart);
+            this.cart.clear();
+            this.orderPane.clearCartList();
         }
     }
 

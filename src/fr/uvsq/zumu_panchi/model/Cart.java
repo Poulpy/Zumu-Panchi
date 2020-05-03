@@ -83,4 +83,8 @@ public class Cart {
 
         return totalPoints;
     }
+    
+    public void clear() {
+        this.works.clear();
+    }
 }

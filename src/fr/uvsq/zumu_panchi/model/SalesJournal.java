@@ -7,15 +7,13 @@ package fr.uvsq.zumu_panchi.model;
 
 import java.util.ArrayList;
 
-// ----------- << imports@AAAAAAFxcAwF4H0SpGc= >>
-// ----------- >>
-
-// ----------- << class.annotations@AAAAAAFxcAwF4H0SpGc= >>
-// ----------- >>
 public class SalesJournal {
-    // ----------- << attribute.annotations@AAAAAAFxcAzt1n08CB4= >>
-    // ----------- >>
+
     ArrayList<Cart> carts;
+    
+    public SalesJournal() {
+        this.carts = new ArrayList<Cart>();
+    }
 
     public ArrayList<Cart> getCarts() {
         return carts;
@@ -28,7 +26,4 @@ public class SalesJournal {
     public void addCart(Cart cartToAdd) {
     	carts.add(cartToAdd);
     }
-
-// ----------- << class.extras@AAAAAAFxcAwF4H0SpGc= >>
-// ----------- >>
 }

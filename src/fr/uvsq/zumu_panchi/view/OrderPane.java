@@ -16,6 +16,7 @@ import javax.swing.JTable;
 import fr.uvsq.zumu_panchi.controller.BookshopController;
 import fr.uvsq.zumu_panchi.model.Bookshop;
 import fr.uvsq.zumu_panchi.model.Cart;
+import fr.uvsq.zumu_panchi.model.SalesJournal;
 
 @SuppressWarnings("serial")
 /**
@@ -58,7 +59,8 @@ public class OrderPane extends JPanel {
         this.cart = new Cart();
 
         this.bookshop = new Bookshop();
-        this.bookshopController = new BookshopController(this.bookshop, this.cart, this);
+        SalesJournal salesJournal = new SalesJournal();
+        this.bookshopController = new BookshopController(this.bookshop, this.cart, salesJournal, this);
 
         title = new JLabel("Order");
         title.setFont(new Font("Calibri", Font.BOLD, 30));
@@ -127,5 +129,9 @@ public class OrderPane extends JPanel {
 
     public JButton getOrderCartButton() {
         return this.orderCartButton;
+    }
+    
+    public void clearCartList() {
+        this.cartListModel.clear();
     }
 }
