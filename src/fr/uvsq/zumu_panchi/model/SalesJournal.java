@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class SalesJournal {
 
     ArrayList<Cart> carts;
-    
+
     public SalesJournal() {
         this.carts = new ArrayList<Cart>();
     }
@@ -22,8 +22,8 @@ public class SalesJournal {
     public void setCarts(ArrayList<Cart> carts) {
         this.carts = carts;
     }
-    
+
     public void addCart(Cart cartToAdd) {
-    	carts.add(cartToAdd);
+        carts.add(cartToAdd);
     }
 }

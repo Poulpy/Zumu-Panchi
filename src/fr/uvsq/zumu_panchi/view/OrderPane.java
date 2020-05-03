@@ -5,6 +5,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 
+import javax.swing.BoxLayout;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -49,6 +50,10 @@ public class OrderPane extends JPanel {
     private Cart cart;
 
     private BookshopController bookshopController;
+    
+    private JLabel totalLoyaltyPoints;
+    
+    private JLabel totalPrice;
 
     public OrderPane() {
         super();
@@ -83,8 +88,13 @@ public class OrderPane extends JPanel {
         JScrollPane listScroller = new JScrollPane(cartList);
 
         // Order button
+
         orderCartButton = new JButton("Order");
         orderCartButton.addActionListener(bookshopController);
+        totalLoyaltyPoints = new JLabel();
+        totalPrice = new JLabel();
+        this.setCartInformations(0, 0f);
+
         
         GridBagConstraints c = new GridBagConstraints();
         c.insets = new Insets(6, 6, 6, 6);
@@ -97,8 +107,9 @@ public class OrderPane extends JPanel {
         
         c.gridy = 1;
         c.fill = GridBagConstraints.BOTH;
-        c.weighty = 4.0;
+        c.weighty = 3.0;
         c.weightx = 7.0;
+        c.gridheight = 3;
         this.add(new JScrollPane(this.table), c);
         
         c.weightx = 2.0;
@@ -106,9 +117,20 @@ public class OrderPane extends JPanel {
         this.add(listScroller, c);
         
         c.gridx = 2;
+        c.gridy = 1;
+        
+        c.gridheight = 1;
         c.weightx = 1.0;
         c.fill = GridBagConstraints.NONE;
+                
+        this.add(totalLoyaltyPoints, c);
+        
+        c.gridy = 2;
+        this.add(totalPrice, c);
+        
+        c.gridy = 3;
         this.add(orderCartButton, c);
+        
     }
 
     public JTable getTable() {
@@ -133,5 +155,13 @@ public class OrderPane extends JPanel {
     
     public void clearCartList() {
         this.cartListModel.clear();
+    }
+    
+    public void setCartInformations(int loyaltyPoints, float price) {
+        String loyaltyTextLabel = "Loyalty points : " + loyaltyPoints;
+        String priceTextLabel = "Total price : " + String.format("%.2f", price) + " €";
+        
+        this.totalLoyaltyPoints.setText(loyaltyTextLabel);
+        this.totalPrice.setText(priceTextLabel);
     }
 }

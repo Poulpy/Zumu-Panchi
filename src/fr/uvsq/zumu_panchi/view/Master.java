@@ -22,7 +22,7 @@ public class Master extends JFrame {
     /**
      * The width of the frame
      */
-    final int WIDTH = 1000;
+    final int WIDTH = 1200;
 
     /**
      * The title of the frame

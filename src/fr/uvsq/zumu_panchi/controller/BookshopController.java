@@ -49,6 +49,7 @@ public class BookshopController implements MouseListener, ActionListener {
 
         modelTable.update(bookshop);
         modelTable.fireTableDataChanged();
+        this.orderPane.setCartInformations(this.cart.getLoyaltyPoints(), this.cart.getPrice());
     }
 
     public void removeItemFromCart(int indexOfitemToRemove) {
@@ -67,6 +68,8 @@ public class BookshopController implements MouseListener, ActionListener {
         modelTable.update(bookshop);
         modelTable.fireTableDataChanged();
         cartListModel.remove(indexOfitemToRemove);
+        
+        this.orderPane.setCartInformations(this.cart.getLoyaltyPoints(), this.cart.getPrice());
     }
 
     @Override
@@ -76,6 +79,7 @@ public class BookshopController implements MouseListener, ActionListener {
             salesJournal.addCart(this.cart);
             this.cart.clear();
             this.orderPane.clearCartList();
+            this.orderPane.setCartInformations(0, 0f);
         }
     }
 
