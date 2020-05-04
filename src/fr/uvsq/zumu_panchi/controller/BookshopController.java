@@ -32,24 +32,18 @@ public class BookshopController implements MouseListener, ActionListener {
     }
 
     public void addElementToCart(int row, int col) {
-        JTable table = orderPane.getTable();
-        DefaultListModel<String> cartListModel = orderPane.getCartListModel();
-        WorksTable modelTable = orderPane.getModelTable();
-
-        Stock item = this.bookshop.getWork((String) table.getValueAt(row, 0));
+        Stock item = this.getItemSelected();
 
         try {
             Stock<Work> itemShipped = item.takeOutOneItem();
             cart.addItemToCart(itemShipped);
-            cartListModel.addElement(item.getTitle());
-            modelTable.update(bookshop);
-            modelTable.fireTableDataChanged();
-            this.orderPane.setCartInformations(this.cart.getLoyaltyPoints(), this.cart.getPrice());
+            orderPane.addItemToCart(itemShipped.getTitle());
+            orderPane.updateBookshopView(this.bookshop);
+            orderPane.setCartInformations(this.cart.getLoyaltyPoints(), this.cart.getPrice());
         } catch (StockDepletedException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-
     }
 
     public void removeItemFromCart(int indexOfitemToRemove) {
@@ -110,6 +104,14 @@ public class BookshopController implements MouseListener, ActionListener {
                 this.removeItemFromCart(index);
             }
         }
+    }
+    
+    public Stock getItemSelected() {
+        JTable table = orderPane.getTable();
+        
+        int row = table.getSelectedRow();
+        
+        return this.bookshop.getWork((String) table.getValueAt(row, 0));
     }
 
     @Override

@@ -180,4 +180,13 @@ public class OrderPane extends JPanel {
     public void updatePointsEarned(int newPoints) {
         this.loyaltyPointsEarnedLabel.setText("Your points    " + (getCurrentPoints() + newPoints));
     }
+    
+    public void updateBookshopView(Bookshop b) {
+        modelTable.update(bookshop);
+        modelTable.fireTableDataChanged();
+    }
+    
+    public void addItemToCart(String title) {
+        cartListModel.addElement(title);
+    }
 }
