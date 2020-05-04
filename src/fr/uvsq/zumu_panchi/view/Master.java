@@ -3,6 +3,7 @@ package fr.uvsq.zumu_panchi.view;
 import java.awt.Toolkit;
 import java.io.IOException;
 
+import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JTabbedPane;
@@ -42,7 +43,35 @@ public class Master extends JFrame {
         super(TITLE);
         setSize(WIDTH, HEIGHT);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setIconImage(Toolkit.getDefaultToolkit().getImage("resources/cochon.png"));
+        
+        
+        
+        
+        
+        java.net.URL URL = Master.class.getClassLoader().getResource("cochon.png");
+        if (URL == null) {
+            System.err.println("Couldn't find file AGAIN 2 :resources/cochon.png " );
+        } else {
+            System.out.println("Works !");
+        }
+        setIconImage(Toolkit.getDefaultToolkit().getImage(Master.class.getClassLoader().getResource("cochon.png")));
+        
+        /*
+        ImageIcon img = new ImageIcon(this.getClass().getResource("cochon.png"));
+        
+        if (img == null) {
+            System.err.println("Couldn't find file IMAGE :resources/cochon.png " );
+        }
+        this.setIconImage(img.getImage());
+        */
+        //this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("resources/cochon.png")));
+        //setIconImage(Toolkit.getDefaultToolkit().getImage("resources/cochon.png"));
+
+
+        //setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../resources/cochon.png")));
+
+
+        //setIconImage(Toolkit.getDefaultToolkit().getImage("resources/cochon.png"));
 
         JTabbedPane tabbedPane = new JTabbedPane();
 

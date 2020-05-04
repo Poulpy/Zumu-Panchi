@@ -14,6 +14,7 @@
     <property name="dir.buildfile" value="."/>
     <property name="dir.workspace" value="D:/wp"/>
     <property name="dir.jarfile" value="${dir.buildfile}/dist"/>
+	<property name="dir.resources" value="${dir.buildfile}/resources"/>
     <target name="create_run_jar">
         <jar destfile="${dir.jarfile}/zumu_panchi.jar" filesetmanifest="mergewithoutmain">
             <manifest>
@@ -21,6 +22,7 @@
                 <attribute name="Class-Path" value="."/>
             </manifest>
             <fileset dir="${dir.buildfile}/bin"/>
+        	<fileset dir="${dir.buildfile}/resources" />
         </jar>
     </target>
 </project>
