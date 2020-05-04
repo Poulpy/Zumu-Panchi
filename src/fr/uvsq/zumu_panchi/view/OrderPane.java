@@ -189,4 +189,8 @@ public class OrderPane extends JPanel {
     public void addItemToCart(String title) {
         cartListModel.addElement(title);
     }
+    
+    public void removeItemFromCart(int index) {
+        cartListModel.remove(index);
+    }
 }

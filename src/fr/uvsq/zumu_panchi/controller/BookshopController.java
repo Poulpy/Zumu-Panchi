@@ -5,7 +5,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.JTable;
 
@@ -16,7 +15,6 @@ import fr.uvsq.zumu_panchi.model.Stock;
 import fr.uvsq.zumu_panchi.model.StockDepletedException;
 import fr.uvsq.zumu_panchi.model.Work;
 import fr.uvsq.zumu_panchi.view.OrderPane;
-import fr.uvsq.zumu_panchi.view.WorksTable;
 
 public class BookshopController implements MouseListener, ActionListener {
 
@@ -31,50 +29,42 @@ public class BookshopController implements MouseListener, ActionListener {
         this.salesJournal = salesJournal;
     }
 
-    public void addElementToCart(int row, int col) {
-        Stock item = this.getItemSelected();
+    /**
+     * Takes out one item from the bookshop and add it to the cart
+     * 
+     * @param row
+     * @param col
+     * @throws StockDepletedException
+     */
+    public void addItemToCart() throws StockDepletedException {
+        Stock item = this.getItemSelectedFromBookshop();
 
-        try {
-            Stock<Work> itemShipped = item.takeOutOneItem();
-            cart.addItemToCart(itemShipped);
-            orderPane.addItemToCart(itemShipped.getTitle());
-            orderPane.updateBookshopView(this.bookshop);
-            orderPane.setCartInformations(this.cart.getLoyaltyPoints(), this.cart.getPrice());
-        } catch (StockDepletedException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+        Stock<Work> itemShipped = item.takeOutOneItem();
+        cart.addItemToCart(itemShipped);
+
+        // Updating the view
+        orderPane.addItemToCart(itemShipped.getTitle());
+        orderPane.updateBookshopView(this.bookshop);
+        orderPane.setCartInformations(this.cart.getLoyaltyPoints(), this.cart.getPrice());
     }
 
-    public void removeItemFromCart(int indexOfitemToRemove) {
-        JTable table = orderPane.getTable();
-        DefaultListModel<String> cartListModel = orderPane.getCartListModel();
-        JList<String> cartList = orderPane.getCartList();
-        WorksTable modelTable = orderPane.getModelTable();
+    public void removeItemFromCart(int indexOfitemToRemove) throws StockDepletedException {
+        Stock work = getItemSelectedFromCart();
 
-        String itemToRemove = cartList.getSelectedValue();
+        bookshop.increaseStock(work.getTitle());
+        cart.removeItemFromCart(work);
 
-        Stock work = this.bookshop.getWork(itemToRemove);
-
-        this.bookshop.increaseStock(work.getTitle());
-        try {
-            cart.removeItemFromCart(work);
-        } catch (StockDepletedException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-
-        modelTable.update(bookshop);
-        modelTable.fireTableDataChanged();
-        cartListModel.remove(indexOfitemToRemove);
-        
-        this.orderPane.setCartInformations(this.cart.getLoyaltyPoints(), this.cart.getPrice());
+        // update view
+        orderPane.updateBookshopView(this.bookshop);
+        orderPane.removeItemFromCart(indexOfitemToRemove);
+        orderPane.setCartInformations(this.cart.getLoyaltyPoints(), this.cart.getPrice());
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == this.orderPane.getOrderCartButton()) {
             System.out.println("Order ...");
+            
             if (this.cart.getBooks().size() == 0) {
                 // TODO label indicating cart is empty
                 System.out.println("Cart is empty !");
@@ -92,25 +82,35 @@ public class BookshopController implements MouseListener, ActionListener {
     public void mouseClicked(MouseEvent e) {
         if (e.getClickCount() == 1) {
 
-            // Add to cart
-            if (e.getSource() == orderPane.getTable()) {
-                int row = orderPane.getTable().getSelectedRow();
-                int column = orderPane.getTable().getSelectedColumn();
-                this.addElementToCart(row, column);
-
-                // Remove from cart
-            } else if (e.getSource() == orderPane.getCartList()) {
-                int index = orderPane.getCartList().locationToIndex(e.getPoint());
-                this.removeItemFromCart(index);
+            try {
+                // Add to cart
+                if (e.getSource() == orderPane.getTable()) {
+                    this.addItemToCart();
+                    // Remove from cart
+                } else if (e.getSource() == orderPane.getCartList()) {
+                    int index = orderPane.getCartList().locationToIndex(e.getPoint());
+                    this.removeItemFromCart(index);
+                }
+            } catch (StockDepletedException e1) {
+                // TODO label indicating stock is 0
+                e1.printStackTrace();
             }
         }
     }
-    
-    public Stock getItemSelected() {
+
+    public Stock getItemSelectedFromCart() {
+        JList<String> cartList = orderPane.getCartList();
+
+        String itemToRemove = cartList.getSelectedValue();
+
+        return this.bookshop.getWork(itemToRemove);
+    }
+
+    public Stock getItemSelectedFromBookshop() {
         JTable table = orderPane.getTable();
-        
+
         int row = table.getSelectedRow();
-        
+
         return this.bookshop.getWork((String) table.getValueAt(row, 0));
     }
 
@@ -141,15 +141,15 @@ public class BookshopController implements MouseListener, ActionListener {
     public void setOrderPane(OrderPane orderPane) {
         this.orderPane = orderPane;
     }
-    
+
     public Cart getCart() {
         return this.cart;
     }
-    
+
     public Bookshop getBookshop() {
         return this.bookshop;
     }
-    
+
     public SalesJournal getSalesJournal() {
         return this.salesJournal;
     }
