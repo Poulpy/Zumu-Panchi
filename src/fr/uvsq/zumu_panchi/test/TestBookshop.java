@@ -20,14 +20,14 @@ class TestBookshop {
 
     @Test
     void testSeedComicBooks() throws IOException {
-        this.b.seedComicBooks("resources/comic_books.csv");
+        this.b.seedComicBooks("comic_books.csv");
         System.out.println(this.b.getStocks());
         assertEquals(this.b.getStocks().keySet().size(), 4);
     }
 
     @Test
     void testSeedBooks() throws IOException {
-        this.b.seedComicBooks("resources/books.csv");
+        this.b.seedComicBooks("books.csv");
         System.out.println(this.b.getStocks());
         assertEquals(this.b.getStocks().keySet().size(), 1);
     }

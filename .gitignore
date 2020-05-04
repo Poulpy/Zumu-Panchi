@@ -1,2 +1,5 @@
 /bin/
 /.settings/
+/build2.xml
+/junit/
+/jar.xml
