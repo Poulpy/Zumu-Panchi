@@ -6,6 +6,8 @@
 package fr.uvsq.zumu_panchi.model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * A collection of books
@@ -19,22 +21,24 @@ public class Cart<T extends Work> {
      * List of books in the cart
      */
     private ArrayList<Stock<T>> works;
+    
+    private Map<String, Stock<T>> items;
 
     public Cart() {
         this.works = new ArrayList<Stock<T>>();
+        this.items = new HashMap<String, Stock<T>>();
     }
 
-    public Cart(ArrayList<Stock<T>> works) {
-        this.works = works;
-    }
 
     /**
      * Remove an item from the cart
      * 
      * @param work
+     * @throws StockDepletedException 
      */
-    public void removeItemToCart(Stock work) {
-        this.works.remove(work);
+    public void removeItemFromCart(Stock<T> item) throws StockDepletedException {
+        this.works.remove(item);
+        this.items.get(item.getTitle()).decreaseStock();
     }
 
     /**
@@ -42,8 +46,14 @@ public class Cart<T extends Work> {
      * 
      * @param work
      */
-    public void addItemToCart(Stock<T> work) {
-        this.works.add(work);
+    public void addItemToCart(Stock<T> item) {
+        this.works.add(item);
+        
+        if (this.items.containsKey(item)) {
+            this.items.get(item).increaseStock();
+        } else {
+            this.items.put(item.getTitle(), item);
+        }
     }
 
     public ArrayList<Stock<T>> getBooks() {

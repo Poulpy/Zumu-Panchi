@@ -28,6 +28,13 @@ public class Stock<T extends Work> {
         this.work = work;
         this.quantity = quantity;
     }
+    
+    public Stock<T> takeOutOneItem() throws StockDepletedException {
+        Stock<T> itemTaken = new Stock<T>(this.work, 1);
+        this.decreaseStock();
+        
+        return itemTaken;
+    }
     /**
      * Increase the stock of the book by one
      */
@@ -39,9 +46,11 @@ public class Stock<T extends Work> {
      * Decrease the stock by one
      * Can't go below zero
      */
-    public void decreaseStock() {
+    public void decreaseStock() throws StockDepletedException {
         if (this.quantity > 0) {
             this.quantity--;
+        } else {
+            throw new StockDepletedException("There are no more items !");
         }
     }
     

@@ -46,7 +46,13 @@ public class Work {
         this.publisher = publisher;
         this.publishingYear = publishingYear;
         this.suppliersPrice = suppliersPrice;
- 
+    }
+    
+    public Work(Work w) {
+        this.title = w.title;
+        this.publisher = w.publisher;
+        this.publishingYear = w.publishingYear;
+        this.suppliersPrice = w.suppliersPrice;
     }
 
 

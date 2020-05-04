@@ -13,6 +13,7 @@ import fr.uvsq.zumu_panchi.model.Bookshop;
 import fr.uvsq.zumu_panchi.model.Cart;
 import fr.uvsq.zumu_panchi.model.SalesJournal;
 import fr.uvsq.zumu_panchi.model.Stock;
+import fr.uvsq.zumu_panchi.model.StockDepletedException;
 import fr.uvsq.zumu_panchi.model.Work;
 import fr.uvsq.zumu_panchi.view.OrderPane;
 import fr.uvsq.zumu_panchi.view.WorksTable;
@@ -35,21 +36,20 @@ public class BookshopController implements MouseListener, ActionListener {
         DefaultListModel<String> cartListModel = orderPane.getCartListModel();
         WorksTable modelTable = orderPane.getModelTable();
 
-        Stock work = this.bookshop.getWork((String) table.getValueAt(row, 0));
+        Stock item = this.bookshop.getWork((String) table.getValueAt(row, 0));
 
-        if (work.getStock() == 0) {
-            // TODO Exception handling
-            System.out.println("No stocks available !");
-            return;
+        try {
+            Stock<Work> itemShipped = item.takeOutOneItem();
+            cart.addItemToCart(itemShipped);
+            cartListModel.addElement(item.getTitle());
+            modelTable.update(bookshop);
+            modelTable.fireTableDataChanged();
+            this.orderPane.setCartInformations(this.cart.getLoyaltyPoints(), this.cart.getPrice());
+        } catch (StockDepletedException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
         }
 
-        this.bookshop.decreaseStock(work.getTitle());
-        cart.addItemToCart(work);
-        cartListModel.addElement(work.getTitle());
-
-        modelTable.update(bookshop);
-        modelTable.fireTableDataChanged();
-        this.orderPane.setCartInformations(this.cart.getLoyaltyPoints(), this.cart.getPrice());
     }
 
     public void removeItemFromCart(int indexOfitemToRemove) {
@@ -63,7 +63,12 @@ public class BookshopController implements MouseListener, ActionListener {
         Stock work = this.bookshop.getWork(itemToRemove);
 
         this.bookshop.increaseStock(work.getTitle());
-        cart.removeItemToCart(work);
+        try {
+            cart.removeItemFromCart(work);
+        } catch (StockDepletedException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
 
         modelTable.update(bookshop);
         modelTable.fireTableDataChanged();

@@ -99,8 +99,9 @@ public class Bookshop<T extends Work> {
      * Decrease the stock of a book by one
      * 
      * @param bookStockToDiminish
+     * @throws StockDepletedException 
      */
-    public void decreaseStock(String bookStockToDiminish) {
+    public void decreaseStock(String bookStockToDiminish) throws StockDepletedException {
         Stock<T> book = this.products.get(bookStockToDiminish);
         book.decreaseStock();
 
