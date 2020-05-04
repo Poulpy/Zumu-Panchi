@@ -13,18 +13,18 @@ import java.util.ArrayList;
  * @author paul
  *
  */
-public class Cart {
+public class Cart<T extends Work> {
 
     /**
      * List of books in the cart
      */
-    private ArrayList<Work> works;
+    private ArrayList<Stock<T>> works;
 
     public Cart() {
-        this.works = new ArrayList<Work>();
+        this.works = new ArrayList<Stock<T>>();
     }
 
-    public Cart(ArrayList<Work> works) {
+    public Cart(ArrayList<Stock<T>> works) {
         this.works = works;
     }
 
@@ -33,7 +33,7 @@ public class Cart {
      * 
      * @param work
      */
-    public void removeItemToCart(Work work) {
+    public void removeItemToCart(Stock work) {
         this.works.remove(work);
     }
 
@@ -42,11 +42,11 @@ public class Cart {
      * 
      * @param work
      */
-    public void addItemToCart(Work work) {
+    public void addItemToCart(Stock<T> work) {
         this.works.add(work);
     }
 
-    public ArrayList<Work> getBooks() {
+    public ArrayList<Stock<T>> getBooks() {
         return this.works;
     }
 
@@ -60,7 +60,7 @@ public class Cart {
 
         totalPrice = 0;
 
-        for (Work b : this.works) {
+        for (Stock<T> b : this.works) {
             totalPrice += b.getSellingPrice();
         }
 
@@ -77,8 +77,8 @@ public class Cart {
 
         totalPoints = 0;
 
-        for (Work b : this.works) {
-            totalPoints += b.loyaltyPoints;
+        for (Stock<T> b : this.works) {
+            totalPoints += b.getLoyaltyPoints();
         }
 
         return totalPoints;

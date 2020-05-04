@@ -29,9 +29,9 @@ public class ComicBook extends Work {
      * @param publishingYear
      * @param suppliersPrice
      */
-    public ComicBook(String title, String publisher, int publishingYear, float suppliersPrice, int inStock,
+    public ComicBook(String title, String publisher, int publishingYear, float suppliersPrice,
             String cartoonist, String scriptwriter) {
-        super(title, publisher, publishingYear, suppliersPrice, inStock);
+        super(title, publisher, publishingYear, suppliersPrice);
 
         this.cartoonist = cartoonist;
         this.scriptwriter = scriptwriter;
@@ -39,9 +39,9 @@ public class ComicBook extends Work {
         this.loyaltyPoints = 50;
     }
 
-    public ComicBook(String title, String publisher, int publishingYear, float suppliersPrice, int inStock,
+    public ComicBook(String title, String publisher, int publishingYear, float suppliersPrice,
             String author) {
-        this(title, publisher, publishingYear, suppliersPrice, inStock, author, author);
+        this(title, publisher, publishingYear, suppliersPrice, author, author);
     }
 
     public String getScriptwriter() {

@@ -27,6 +27,5 @@ To generate the jar run :
 
 - Offer a work when user has reached 1000 points, and clear 1000 points then after
 
-- Change the model Work to Stock
 - add test task to ant build file
 

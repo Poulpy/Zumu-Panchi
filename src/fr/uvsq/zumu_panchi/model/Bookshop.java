@@ -33,15 +33,15 @@ import java.util.stream.Stream;
  * @author paul
  *
  */
-public class Bookshop {
+public class Bookshop<T extends Work> {
 
     /**
      * Stores the book with the title of the book as a key
      */
-    private Map<String, Work> stocks;
+    private Map<String, Stock<T>> products;
 
     public Bookshop() {
-        stocks = new HashMap<String, Work>();
+        products = new HashMap<String, Stock<T>>();
     }
 
     /**
@@ -54,12 +54,13 @@ public class Bookshop {
         List<String[]> list;
 
         list = new ArrayList<String[]>();
-        Set<Map.Entry<String, Work>> entries = stocks.entrySet();
-        Iterator<Entry<String, Work>> entriesIterator = entries.iterator();
+        //Set<Map.Entry<String, Work>> entries = stocks.entrySet();
+        Set<Map.Entry<String, Stock<T>>> entries = products.entrySet();
+        Iterator<Entry<String, Stock<T>>> entriesIterator = entries.iterator();
 
         while (entriesIterator.hasNext()) {
             Map.Entry mapping = (Map.Entry) entriesIterator.next();
-            Work b = (Work) mapping.getValue();
+            Stock<T> b = (Stock) mapping.getValue();
 
             list.add(b.toStringArray());
         }
@@ -91,7 +92,7 @@ public class Bookshop {
      * @param title
      */
     public void increaseStock(String title) {
-        this.stocks.get(title).increaseStock();
+        this.products.get(title).increaseStock();
     }
 
     /**
@@ -100,18 +101,18 @@ public class Bookshop {
      * @param bookStockToDiminish
      */
     public void decreaseStock(String bookStockToDiminish) {
-        Work book = this.stocks.get(bookStockToDiminish);
+        Stock<T> book = this.products.get(bookStockToDiminish);
         book.decreaseStock();
 
-        this.stocks.replace(bookStockToDiminish, book);
+        this.products.replace(bookStockToDiminish, book);
     }
 
-    public Map<String, Work> getStocks() {
-        return stocks;
+    public Map<String, Stock<T>> getStocks() {
+        return products;
     }
 
-    public Work getWork(String work) {
-        return this.stocks.get(work);
+    public Stock getWork(String work) {
+        return this.products.get(work);
     }
 
     /**
@@ -129,9 +130,9 @@ public class Bookshop {
         
         while ((line = reader.readLine()) != null) {
             String args[] = line.split(",");
-            Work w = new ComicBook(args[0], args[1], Integer.parseInt(args[2]), Float.parseFloat(args[3]),
-                    Integer.parseInt(args[4]), args[5]);
-            this.stocks.put(args[0], w);
+            Work w = new ComicBook(args[0], args[1], Integer.parseInt(args[2]), Float.parseFloat(args[3]), args[5]);
+            Stock s = new Stock(w, Integer.parseInt(args[4]));
+            this.products.put(args[0], s);
         }
         
         reader.close();
@@ -146,9 +147,9 @@ public class Bookshop {
         
         while ((line = reader.readLine()) != null) {
             String args[] = line.split(",");
-            Work w = new Book(args[0], args[1], Integer.parseInt(args[2]), Float.parseFloat(args[3]),
-                    Integer.parseInt(args[4]), args[5]);
-            this.stocks.put(args[0], w);
+            Work w = new Book(args[0], args[1], Integer.parseInt(args[2]), Float.parseFloat(args[3]), args[5]);
+            Stock s = new Stock(w, Integer.parseInt(args[4]));
+            this.products.put(args[0], s);
         }
         
         reader.close();

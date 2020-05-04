@@ -1,12 +1,12 @@
 package fr.uvsq.zumu_panchi.model;
 
-public class Stock {
+public class Stock<T extends Work> {
     
-    private Work work;
+    private T work;
     
-    private int stock = 0;
+    private int quantity = 0;
     
-    private boolean ebookAvailable = false;
+    private boolean ebook = false;
 
     /**
      * The number of points a customer earns after buying the work
@@ -18,17 +18,21 @@ public class Stock {
      */
     protected int margin;
 
-    public Stock(Work work, int stock, boolean ebookAvailable) {
+    public Stock(T work, int quantity, boolean ebook) {
         this.work = work;
-        this.stock = stock;
-        this.ebookAvailable = ebookAvailable;
+        this.quantity = quantity;
+        this.ebook = ebook;
     }
 
+    public Stock(T work, int quantity) {
+        this.work = work;
+        this.quantity = quantity;
+    }
     /**
      * Increase the stock of the book by one
      */
     public void increaseStock() {
-        this.stock++;
+        this.quantity++;
     }
 
     /**
@@ -36,8 +40,8 @@ public class Stock {
      * Can't go below zero
      */
     public void decreaseStock() {
-        if (this.stock > 0) {
-            this.stock--;
+        if (this.quantity > 0) {
+            this.quantity--;
         }
     }
     
@@ -55,7 +59,7 @@ public class Stock {
         str[1] = this.work.publisher;
         str[2] = String.valueOf(this.work.publishingYear);
         str[3] = String.format("%.2f", this.getSellingPrice()) + " €";
-        str[4] = String.valueOf(this.stock);
+        str[4] = String.valueOf(this.quantity);
 
         return str;
     }
@@ -70,6 +74,14 @@ public class Stock {
     }
     
     public int getStock() {
-        return this.stock;
+        return this.quantity;
+    }
+    
+    public String getTitle() {
+        return this.work.getTitle();
+    }
+    
+    public int getLoyaltyPoints() {
+        return this.work.loyaltyPoints;
     }
 }

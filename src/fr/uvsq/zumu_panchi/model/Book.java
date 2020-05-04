@@ -24,8 +24,8 @@ public class Book extends Work {
      * @param publishingYear
      * @param suppliersPrice
      */
-    public Book(String title, String publisher, int publishingYear, float suppliersPrice, int inStock, String author) {
-        super(title, publisher, publishingYear, suppliersPrice, inStock);
+    public Book(String title, String publisher, int publishingYear, float suppliersPrice, String author) {
+        super(title, publisher, publishingYear, suppliersPrice);
 
         this.author = author;
         this.margin = 20;

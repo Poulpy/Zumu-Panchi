@@ -12,6 +12,7 @@ import javax.swing.JTable;
 import fr.uvsq.zumu_panchi.model.Bookshop;
 import fr.uvsq.zumu_panchi.model.Cart;
 import fr.uvsq.zumu_panchi.model.SalesJournal;
+import fr.uvsq.zumu_panchi.model.Stock;
 import fr.uvsq.zumu_panchi.model.Work;
 import fr.uvsq.zumu_panchi.view.OrderPane;
 import fr.uvsq.zumu_panchi.view.WorksTable;
@@ -34,7 +35,7 @@ public class BookshopController implements MouseListener, ActionListener {
         DefaultListModel<String> cartListModel = orderPane.getCartListModel();
         WorksTable modelTable = orderPane.getModelTable();
 
-        Work work = this.bookshop.getWork((String) table.getValueAt(row, 0));
+        Stock work = this.bookshop.getWork((String) table.getValueAt(row, 0));
 
         if (work.getStock() == 0) {
             // TODO Exception handling
@@ -59,7 +60,7 @@ public class BookshopController implements MouseListener, ActionListener {
 
         String itemToRemove = cartList.getSelectedValue();
 
-        Work work = this.bookshop.getWork(itemToRemove);
+        Stock work = this.bookshop.getWork(itemToRemove);
 
         this.bookshop.increaseStock(work.getTitle());
         cart.removeItemToCart(work);
