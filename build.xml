@@ -12,7 +12,6 @@
     <!--ANT 1.7 is required                                        -->
     <!--define folder properties-->
     <property name="dir.buildfile" value="."/>
-    <property name="dir.workspace" value="D:/wp"/>
     <property name="dir.jarfile" value="${dir.buildfile}/dist"/>
 	<property name="dir.resources" value="${dir.buildfile}/resources"/>
     <target name="create_run_jar">

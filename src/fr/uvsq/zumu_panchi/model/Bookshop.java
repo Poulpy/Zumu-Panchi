@@ -7,9 +7,14 @@ package fr.uvsq.zumu_panchi.model;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -21,6 +26,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 import java.util.stream.Stream;
+
 
 /**
  * Class that stores the books, along with the stock number
@@ -134,8 +140,8 @@ public class Bookshop {
         fr.close();
     }
     
-    public void seedBooks(String pathToFile) throws IOException {
-        File file = new File(pathToFile);
+    public void seedBooks(String pathToFile) throws IOException, URISyntaxException {
+        /*File file = new File(pathToFile);
 
         FileReader fr = new FileReader(file);
         BufferedReader br = new BufferedReader(fr);
@@ -149,5 +155,55 @@ public class Bookshop {
         
         br.close();
         fr.close();
+        */
+        
+        /*
+        ClassLoader classLoader = getClass().getClassLoader();
+        File file = new File(classLoader.getResource(pathToFile).getFile());
+        InputStream inputStream = new FileInputStream(file);
+        
+        for (String line; (line = reader.readLine()) != null;) {
+            // Process line
+        }
+        */
+        
+        
+        /*
+        URL url = Bookshop.class.getClassLoader().getResource(pathToFile);
+        File file = new File(url.toURI());
+        */
+        /*
+        System.out.println("BAAAAAAAAAAAAAAA");
+        ClassLoader classLoader = this.getClass().getClassLoader();
+        // Getting resource(File) from class loader
+        File file=new File(classLoader.getResource(pathToFile).getFile());
+
+        FileReader fr = new FileReader(file);
+        BufferedReader br = new BufferedReader(fr);
+
+        String line;
+        while ((line = br.readLine()) != null) {
+            String args[] = line.split(",");
+            Work w = new Book(args[0], args[1], Integer.parseInt(args[2]), Float.parseFloat(args[3]), Integer.parseInt(args[4]), args[5]);
+            this.stocks.put(args[0], w);
+        }
+        
+        br.close();
+        fr.close();
+        */
+        
+        
+        InputStream res =
+                Bookshop.class.getResourceAsStream("/"+pathToFile);
+
+                BufferedReader reader =
+                    new BufferedReader(new InputStreamReader(res));
+                String line = null;
+                while ((line = reader.readLine()) != null) {
+                    String args[] = line.split(",");
+                    Work w = new Book(args[0], args[1], Integer.parseInt(args[2]), Float.parseFloat(args[3]), Integer.parseInt(args[4]), args[5]);
+                    this.stocks.put(args[0], w);
+                }
+                reader.close();
     }
 }

@@ -2,6 +2,7 @@ package fr.uvsq.zumu_panchi.view;
 
 import java.awt.Toolkit;
 import java.io.IOException;
+import java.net.URISyntaxException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JComponent;
@@ -80,9 +81,9 @@ public class Master extends JFrame {
         Bookshop bookshop = new Bookshop();
         
         try {
-            bookshop.seedBooks("resources/books.csv");
-            bookshop.seedComicBooks("resources/comic_books.csv");
-        } catch (IOException e) {
+            bookshop.seedBooks("books.csv");
+            //bookshop.seedComicBooks("comic_books.csv");
+        } catch (IOException | URISyntaxException e) {
             e.printStackTrace();
         }
         
