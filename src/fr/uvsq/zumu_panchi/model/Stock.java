@@ -73,17 +73,8 @@ public class Stock<T extends Work> {
         return str;
     }
 
-
-    public int getMargin() {
-        return margin;
-    }
-
     public float getSellingPrice() {
         return ((100 + this.margin) / 100f) * this.work.suppliersPrice;
-    }
-    
-    public int getStock() {
-        return this.quantity;
     }
     
     public String getTitle() {
