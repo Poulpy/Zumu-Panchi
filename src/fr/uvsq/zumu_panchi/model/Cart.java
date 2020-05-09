@@ -23,7 +23,6 @@ public class Cart<T extends Work> {
     private Map<String, Stock<T>> items;
 
     public Cart() {
-        //this.works = new ArrayList<Stock<T>>();
         this.items = new HashMap<String, Stock<T>>();
     }
 
@@ -34,8 +33,6 @@ public class Cart<T extends Work> {
      * @throws StockDepletedException 
      */
     public void removeItemFromCart(Stock<T> item) throws StockDepletedException {
-        System.out.println("Before remove > " + items.get(item.getTitle()) + ":" + items.get(item.getTitle()).getQuantity());
-        //this.works.remove(item);
         if (items.get(item.getTitle()).getQuantity() == 1) {
             items.remove(item.getTitle());
         } else {
@@ -64,14 +61,11 @@ public class Cart<T extends Work> {
      * @param work
      */
     public void addItemToCart(Stock<T> item) {
-        //this.works.add(item);
-        
         if (this.items.containsKey(item.getTitle())) {
             items.get(item.getTitle()).increaseStock();
         } else {
             this.items.put(item.getTitle(), item);
         }
-        System.out.println("After add > " + items.get(item.getTitle()).getTitle() + ":" + items.get(item.getTitle()).getQuantity());
     }
 
     /**
@@ -83,12 +77,6 @@ public class Cart<T extends Work> {
         float totalPrice;
 
         totalPrice = 0;
-
-        /*
-        for (Stock<T> b : this.works) {
-            totalPrice += b.getSellingPrice();
-        }
-        */
         
         Set<Map.Entry<String, Stock<T>>> entries = items.entrySet();
         Iterator<Entry<String, Stock<T>>> entriesIterator = entries.iterator();
@@ -114,13 +102,6 @@ public class Cart<T extends Work> {
 
         totalPoints = 0;
 
-        /*
-        for (Stock<T> b : this.works) {
-            totalPoints += b.getLoyaltyPoints();
-        }
-        */
-        
-        
         Set<Map.Entry<String, Stock<T>>> entries = items.entrySet();
         Iterator<Entry<String, Stock<T>>> entriesIterator = entries.iterator();
 

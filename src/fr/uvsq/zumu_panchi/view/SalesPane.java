@@ -37,11 +37,6 @@ public class SalesPane extends JPanel {
         this.modelTable = new SalesTable(controller.getSalesJournal());
         this.table = new JTable(this.modelTable);
         this.table.setRowHeight(30);
-        /*
-        table.getColumnModel().getColumn(2).setPreferredWidth(10);
-        table.getColumnModel().getColumn(3).setPreferredWidth(5);
-        table.getColumnModel().getColumn(4).setPreferredWidth(5);
-        */
 
         
         GridBagConstraints c = new GridBagConstraints();
@@ -57,7 +52,6 @@ public class SalesPane extends JPanel {
         c.gridy = 1;
         c.fill = GridBagConstraints.BOTH;
         c.weighty = 3.0;
-        //c.gridheight = 3;
         this.add(new JScrollPane(this.table), c);
 	}
 	
