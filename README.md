@@ -22,8 +22,6 @@ To generate the jar run :
 
 # TODO
 
-- Show sales journal on sales tab
-- Update sales journal when ordering a cart
 
 - Offer a work when user has reached 1000 points, and clear 1000 points then after
 
