@@ -38,4 +38,10 @@ public class Sale implements Comparable<Sale> {
     public String getHourOfSellDate() {
         return new SimpleDateFormat("HH:mm").format(sellDate);
     }
+    
+    public String[] toStringArray() {
+        return new String[] {getDayOfSellDate(), getHourOfSellDate(),
+                              String.valueOf(cart.totalItemsShipped()),
+                              String.valueOf(cart.getPrice())};
+    }
 }

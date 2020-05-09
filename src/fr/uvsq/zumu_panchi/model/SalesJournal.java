@@ -7,7 +7,11 @@ package fr.uvsq.zumu_panchi.model;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.Map.Entry;
 
 public class SalesJournal {
 
@@ -31,5 +35,25 @@ public class SalesJournal {
         }
         
         sales.get(key).add(s);
+    }
+    
+    public List<String[]> getList() {
+        List<String[]> list;
+
+        list = new ArrayList<String[]>();
+        
+        Set<Map.Entry<String, ArrayList<Sale>>> entries = sales.entrySet();
+        Iterator<Entry<String, ArrayList<Sale>>> entriesIterator = entries.iterator();
+
+        while (entriesIterator.hasNext()) {
+            Map.Entry mapping = (Map.Entry) entriesIterator.next();
+            ArrayList<Sale> allSales = (ArrayList<Sale>) mapping.getValue();
+            
+            for (Sale s : allSales) {
+                list.add(s.toStringArray());
+            }
+        }
+        
+        return list;
     }
 }

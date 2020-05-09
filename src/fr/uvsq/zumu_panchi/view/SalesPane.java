@@ -18,6 +18,10 @@ import fr.uvsq.zumu_panchi.controller.BookshopController;
 import fr.uvsq.zumu_panchi.model.SalesJournal;
 
 public class SalesPane extends JPanel {
+    
+    
+    private SalesTable modelTable;
+    private JTable table;
 	
 	public SalesPane(BookshopController controller, SalesJournal journal) {
 		JLabel title;
@@ -27,6 +31,15 @@ public class SalesPane extends JPanel {
         this.setLayout(new GridBagLayout());
 
         title.setFont(new Font("Calibri", Font.BOLD, 30));
+
+        this.modelTable = new SalesTable(journal);
+        this.table = new JTable(this.modelTable);
+        this.table.setRowHeight(30);
+        /*
+        table.getColumnModel().getColumn(2).setPreferredWidth(10);
+        table.getColumnModel().getColumn(3).setPreferredWidth(5);
+        table.getColumnModel().getColumn(4).setPreferredWidth(5);
+        */
 
         
         GridBagConstraints c = new GridBagConstraints();

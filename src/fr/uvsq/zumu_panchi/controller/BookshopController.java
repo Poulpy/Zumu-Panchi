@@ -65,7 +65,7 @@ public class BookshopController implements MouseListener, ActionListener {
         if (e.getSource() == this.orderPane.getOrderCartButton()) {
             System.out.println("Order ...");
             
-            if (this.cart.getBooks().size() == 0) {
+            if (this.cart.totalItemsShipped() == 0) {
                 // TODO label indicating cart is empty
                 System.out.println("Cart is empty !");
             } else {

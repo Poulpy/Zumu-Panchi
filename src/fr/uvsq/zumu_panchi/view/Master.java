@@ -70,7 +70,7 @@ public class Master extends JFrame {
         JComponent panel1 = new OrderPane(bookshopController);
         tabbedPane.addTab("Order", panel1);
 
-        JComponent panel2 = new SalesPane(null, null);
+        JComponent panel2 = new SalesPane(bookshopController, salesJournal);
         tabbedPane.addTab("Sales", panel2);
 
         this.add(tabbedPane);

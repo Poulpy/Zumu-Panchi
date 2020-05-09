@@ -7,7 +7,10 @@ package fr.uvsq.zumu_panchi.model;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
+import java.util.Set;
+import java.util.Map.Entry;
 
 /**
  * A collection of books
@@ -17,15 +20,12 @@ import java.util.Map;
  */
 public class Cart<T extends Work> {
 
-    /**
-     * List of books in the cart
-     */
-    private ArrayList<Stock<T>> works;
+
     
     private Map<String, Stock<T>> items;
 
     public Cart() {
-        this.works = new ArrayList<Stock<T>>();
+        //this.works = new ArrayList<Stock<T>>();
         this.items = new HashMap<String, Stock<T>>();
     }
 
@@ -37,8 +37,28 @@ public class Cart<T extends Work> {
      * @throws StockDepletedException 
      */
     public void removeItemFromCart(Stock<T> item) throws StockDepletedException {
-        this.works.remove(item);
-        this.items.get(item.getTitle()).decreaseStock();
+        System.out.println("Before remove > " + items.get(item.getTitle()) + ":" + items.get(item.getTitle()).getQuantity());
+        //this.works.remove(item);
+        if (items.get(item.getTitle()).getQuantity() == 1) {
+            items.remove(item.getTitle());
+        } else {
+            this.items.get(item.getTitle()).decreaseStock();
+        }
+    }
+    
+    public int totalItemsShipped() {
+        int total = 0;
+        Set<Map.Entry<String, Stock<T>>> entries = items.entrySet();
+        Iterator<Entry<String, Stock<T>>> entriesIterator = entries.iterator();
+
+        while (entriesIterator.hasNext()) {
+            Map.Entry mapping = (Map.Entry) entriesIterator.next();
+            Stock<Work> b = (Stock<Work>) mapping.getValue();
+
+            total += b.getQuantity();
+        }
+        
+        return total;
     }
 
     /**
@@ -47,18 +67,17 @@ public class Cart<T extends Work> {
      * @param work
      */
     public void addItemToCart(Stock<T> item) {
-        this.works.add(item);
+        //this.works.add(item);
         
-        if (this.items.containsKey(item)) {
-            this.items.get(item).increaseStock();
+        if (this.items.containsKey(item.getTitle())) {
+            items.get(item.getTitle()).increaseStock();
         } else {
             this.items.put(item.getTitle(), item);
         }
+        System.out.println("After add > " + items.get(item.getTitle()).getTitle() + ":" + items.get(item.getTitle()).getQuantity());
     }
 
-    public ArrayList<Stock<T>> getBooks() {
-        return this.works;
-    }
+
 
     /**
      * Get the total price of the cart
@@ -70,9 +89,22 @@ public class Cart<T extends Work> {
 
         totalPrice = 0;
 
+        /*
         for (Stock<T> b : this.works) {
             totalPrice += b.getSellingPrice();
         }
+        */
+        
+        Set<Map.Entry<String, Stock<T>>> entries = items.entrySet();
+        Iterator<Entry<String, Stock<T>>> entriesIterator = entries.iterator();
+
+        while (entriesIterator.hasNext()) {
+            Map.Entry mapping = (Map.Entry) entriesIterator.next();
+            Stock<T> b = (Stock) mapping.getValue();
+
+            totalPrice += b.getSellingPrice();
+        }
+
 
         return totalPrice;
     }
@@ -87,7 +119,20 @@ public class Cart<T extends Work> {
 
         totalPoints = 0;
 
+        /*
         for (Stock<T> b : this.works) {
+            totalPoints += b.getLoyaltyPoints();
+        }
+        */
+        
+        
+        Set<Map.Entry<String, Stock<T>>> entries = items.entrySet();
+        Iterator<Entry<String, Stock<T>>> entriesIterator = entries.iterator();
+
+        while (entriesIterator.hasNext()) {
+            Map.Entry mapping = (Map.Entry) entriesIterator.next();
+            Stock<T> b = (Stock) mapping.getValue();
+
             totalPoints += b.getLoyaltyPoints();
         }
 
@@ -95,6 +140,6 @@ public class Cart<T extends Work> {
     }
     
     public void clear() {
-        this.works.clear();
+        this.items.clear();
     }
 }
