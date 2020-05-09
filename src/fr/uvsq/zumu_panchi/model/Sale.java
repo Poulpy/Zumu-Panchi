@@ -44,4 +44,10 @@ public class Sale implements Comparable<Sale> {
                               String.valueOf(cart.totalItemsShipped()),
                               String.valueOf(cart.getPrice())};
     }
+    
+    public String toString() {
+        return getDayOfSellDate() + " "
+                + getHourOfSellDate() + " "
+                + cart.toString();
+    }
 }

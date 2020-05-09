@@ -20,15 +20,12 @@ import java.util.Map.Entry;
  */
 public class Cart<T extends Work> {
 
-
-    
     private Map<String, Stock<T>> items;
 
     public Cart() {
         //this.works = new ArrayList<Stock<T>>();
         this.items = new HashMap<String, Stock<T>>();
     }
-
 
     /**
      * Remove an item from the cart
@@ -76,8 +73,6 @@ public class Cart<T extends Work> {
         }
         System.out.println("After add > " + items.get(item.getTitle()).getTitle() + ":" + items.get(item.getTitle()).getQuantity());
     }
-
-
 
     /**
      * Get the total price of the cart

@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
 
+import fr.uvsq.zumu_panchi.model.Bookshop;
 import fr.uvsq.zumu_panchi.model.SalesJournal;
 
 public class SalesTable extends AbstractTableModel {
@@ -19,6 +20,8 @@ public class SalesTable extends AbstractTableModel {
     private final String[] headers;
     
     public SalesTable(SalesJournal sales) {
+        super();
+        
         headers = new String[] {"Day", "Hour", "Articles shipped", "Total"};
         datas = sales.getList();
     }
@@ -37,5 +40,12 @@ public class SalesTable extends AbstractTableModel {
     public Object getValueAt(int rowIndex, int columnIndex) {
         return datas.get(rowIndex)[columnIndex];
     }
-
+    
+    public String getColumnName(int columnIndex) {
+        return this.headers[columnIndex];
+    }
+    
+    public void update(SalesJournal sales) {
+        this.datas = sales.getList();
+    }
 }

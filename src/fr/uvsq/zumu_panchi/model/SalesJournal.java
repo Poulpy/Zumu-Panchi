@@ -6,6 +6,7 @@
 package fr.uvsq.zumu_panchi.model;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -27,14 +28,22 @@ public class SalesJournal {
 
 
     public void addCart(Cart cartToAdd) {
+        ArrayList<Sale> salesToUpdate = new ArrayList<Sale>();
         Sale s = new Sale(cartToAdd);
         String key = s.getDayOfSellDate();
         
-        if (sales.get(key) == null) {
-            sales.put(key, new ArrayList<Sale>());
+       
+        if (sales.containsKey(key)) {
+            
+            System.out.println("Contains key : " + key);
+            salesToUpdate = sales.get(key);
         }
         
-        sales.get(key).add(s);
+        
+        salesToUpdate.add(s);
+        sales.put(key, salesToUpdate);
+        
+        System.out.println(Arrays.toString(sales.get(key).toArray()));
     }
     
     public List<String[]> getList() {
@@ -51,6 +60,7 @@ public class SalesJournal {
             
             for (Sale s : allSales) {
                 list.add(s.toStringArray());
+                System.out.println(s.toStringArray());
             }
         }
         

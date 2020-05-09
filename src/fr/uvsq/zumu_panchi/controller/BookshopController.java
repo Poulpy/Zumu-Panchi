@@ -15,13 +15,16 @@ import fr.uvsq.zumu_panchi.model.Stock;
 import fr.uvsq.zumu_panchi.model.StockDepletedException;
 import fr.uvsq.zumu_panchi.model.Work;
 import fr.uvsq.zumu_panchi.view.OrderPane;
+import fr.uvsq.zumu_panchi.view.SalesPane;
 
 public class BookshopController implements MouseListener, ActionListener {
 
     private Bookshop bookshop;
     private Cart cart;
-    private OrderPane orderPane;
     private SalesJournal salesJournal;
+    
+    private SalesPane salesPane;
+    private OrderPane orderPane;
 
     public BookshopController(Bookshop bookshop, Cart cart, SalesJournal salesJournal) {
         this.bookshop = bookshop;
@@ -70,12 +73,17 @@ public class BookshopController implements MouseListener, ActionListener {
                 System.out.println("Cart is empty !");
             } else {
                 salesJournal.addCart(this.cart);
+                salesPane.updateSalesView(salesJournal);
                 this.orderPane.updatePointsEarned(this.cart.getLoyaltyPoints());
-                this.cart.clear();
+                this.cart = new Cart();
                 this.orderPane.clearCartList();
                 this.orderPane.setCartInformations(0, 0f);
             }
         }
+    }
+    
+    public void updateSalesView() {
+        
     }
 
     @Override
@@ -140,6 +148,10 @@ public class BookshopController implements MouseListener, ActionListener {
 
     public void setOrderPane(OrderPane orderPane) {
         this.orderPane = orderPane;
+    }
+    
+    public void setSalesPane(SalesPane salesPane) {
+        this.salesPane = salesPane;
     }
 
     public Cart getCart() {

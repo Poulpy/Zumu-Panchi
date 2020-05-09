@@ -15,6 +15,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
 import fr.uvsq.zumu_panchi.controller.BookshopController;
+import fr.uvsq.zumu_panchi.model.Bookshop;
 import fr.uvsq.zumu_panchi.model.SalesJournal;
 
 public class SalesPane extends JPanel {
@@ -23,7 +24,7 @@ public class SalesPane extends JPanel {
     private SalesTable modelTable;
     private JTable table;
 	
-	public SalesPane(BookshopController controller, SalesJournal journal) {
+	public SalesPane(BookshopController controller) {
 		JLabel title;
 		
 		title = new JLabel("Sales journal");
@@ -32,7 +33,8 @@ public class SalesPane extends JPanel {
 
         title.setFont(new Font("Calibri", Font.BOLD, 30));
 
-        this.modelTable = new SalesTable(journal);
+        controller.setSalesPane(this);
+        this.modelTable = new SalesTable(controller.getSalesJournal());
         this.table = new JTable(this.modelTable);
         this.table.setRowHeight(30);
         /*
@@ -51,5 +53,16 @@ public class SalesPane extends JPanel {
         c.weightx = 1.0;
         this.add(title, c);
         
+        c.gridx = 0;
+        c.gridy = 1;
+        c.fill = GridBagConstraints.BOTH;
+        c.weighty = 3.0;
+        //c.gridheight = 3;
+        this.add(new JScrollPane(this.table), c);
 	}
+	
+    public void updateSalesView(SalesJournal sales) {
+        modelTable.update(sales);
+        modelTable.fireTableDataChanged();
+    }
 }
