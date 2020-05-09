@@ -21,7 +21,6 @@ public class Work {
 
     protected float suppliersPrice;
 
-
     /**
      * The number of points a customer earns after buying the work
      */
@@ -31,9 +30,6 @@ public class Work {
      * In percent. It's for calculating the price
      */
     protected int margin;
-
-
-
 
     /**
      * @param title
@@ -55,8 +51,6 @@ public class Work {
         this.suppliersPrice = w.suppliersPrice;
     }
 
-
-
     public String toString() {
         return this.title + " " + this.publisher + " " + this.publishingYear;
     }
@@ -64,25 +58,4 @@ public class Work {
     public String getTitle() {
         return title;
     }
-
-    public String getPublisher() {
-        return publisher;
-    }
-
-    public int getPublishingYear() {
-        return publishingYear;
-    }
-
-    public float getSuppliersPrice() {
-        return suppliersPrice;
-    }
-
-    public int getMargin() {
-        return margin;
-    }
-
-    public float getSellingPrice() {
-        return ((100 + this.margin) / 100f) * this.suppliersPrice;
-    }
-
 }

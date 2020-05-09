@@ -67,23 +67,19 @@ public class Stock<T extends Work> {
         str[0] = this.work.title;
         str[1] = this.work.publisher;
         str[2] = String.valueOf(this.work.publishingYear);
-        str[3] = String.format("%.2f", this.getSellingPrice()) + " €";
+        str[3] = String.format("%.2f", this.getCostPerUnit()) + " €";
         str[4] = String.valueOf(this.quantity);
 
         return str;
     }
 
-
-    public int getMargin() {
-        return margin;
-    }
-
     public float getSellingPrice() {
-        return ((100 + this.margin) / 100f) * this.work.suppliersPrice;
+        return (((100 + this.margin) / 100f) * this.work.suppliersPrice) * this.quantity;
     }
     
-    public int getStock() {
-        return this.quantity;
+
+    public float getCostPerUnit() {
+        return (((100 + this.margin) / 100f) * this.work.suppliersPrice);
     }
     
     public String getTitle() {
@@ -91,6 +87,10 @@ public class Stock<T extends Work> {
     }
     
     public int getLoyaltyPoints() {
-        return this.work.loyaltyPoints;
+        return this.work.loyaltyPoints * this.quantity;
+    }
+    
+    public int getQuantity() {
+        return this.quantity;
     }
 }
