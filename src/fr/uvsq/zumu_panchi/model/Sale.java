@@ -42,7 +42,7 @@ public class Sale implements Comparable<Sale> {
     public String[] toStringArray() {
         return new String[] {getDayOfSellDate(), getHourOfSellDate(),
                               String.valueOf(cart.totalItemsShipped()),
-                              String.valueOf(cart.getPrice())};
+                              String.format("%.2f", cart.getPrice()) + " €"};
     }
     
     public String toString() {
