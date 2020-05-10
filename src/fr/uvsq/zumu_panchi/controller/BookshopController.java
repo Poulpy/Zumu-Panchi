@@ -23,7 +23,7 @@ public class BookshopController implements MouseListener, ActionListener {
     private Cart<Work> cart;
     private SalesJournal salesJournal;
     private int loyaltyPoints;
-    private final int THRESHOLD = 200;
+    private final int THRESHOLD = 1000;
     
     private SalesPane salesPane;
     private OrderPane orderPane;
