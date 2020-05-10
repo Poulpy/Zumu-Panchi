@@ -128,7 +128,7 @@ public class Bookshop<T extends Work> {
         reader.close();
     }
     
-    public Stock<T> offerRandomItem() throws StockDepletedException {
+    public Stock<T> offerRandomItem() throws ItemOutOfStockException {
         Stock<T> itemToOffer = null;
         boolean searchForBook = true;
         

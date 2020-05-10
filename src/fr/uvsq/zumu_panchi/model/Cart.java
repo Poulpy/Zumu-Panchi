@@ -19,28 +19,36 @@ import java.util.Set;
  */
 public class Cart<T extends Work> {
 
+    /**
+     * The items in the cart
+     */
     private Map<String, Stock<T>> items;
 
     public Cart() {
-        this.items = new HashMap<String, Stock<T>>();
+        items = new HashMap<String, Stock<T>>();
     }
 
     /**
      * Remove an item from the cart
      * 
      * @param work
-     * @throws StockDepletedException 
+     * @throws ItemOutOfStockException
      */
-    public void removeItemFromCart(Stock<T> item) throws StockDepletedException {
+    public void removeItemFromCart(Stock<T> item) throws ItemOutOfStockException {
         if (items.get(item.getTitle()).getQuantity() == 1) {
             items.remove(item.getTitle());
         } else {
-            Stock s = this.items.get(item.getTitle());
+            Stock s = items.get(item.getTitle());
             s.decreaseStock();
             items.put(item.getTitle(), s);
         }
     }
-    
+
+    /**
+     * Total number of items in the cart
+     * 
+     * @return
+     */
     public int totalItemsShipped() {
         int total = 0;
         Set<Map.Entry<String, Stock<T>>> entries = items.entrySet();
@@ -52,20 +60,21 @@ public class Cart<T extends Work> {
 
             total += b.getQuantity();
         }
-        
+
         return total;
     }
 
     /**
-     * Add an item to the cart
+     * Add an item to the cart If the item's already present, increases the stock of
+     * the batch of items
      * 
      * @param work
      */
     public void addItemToCart(Stock<T> item) {
-        if (this.items.containsKey(item.getTitle())) {
+        if (items.containsKey(item.getTitle())) {
             items.get(item.getTitle()).increaseStock();
         } else {
-            this.items.put(item.getTitle(), item);
+            items.put(item.getTitle(), item);
         }
     }
 
@@ -78,7 +87,7 @@ public class Cart<T extends Work> {
         float totalPrice;
 
         totalPrice = 0;
-        
+
         Set<Map.Entry<String, Stock<T>>> entries = items.entrySet();
         Iterator<Entry<String, Stock<T>>> entriesIterator = entries.iterator();
 
@@ -88,7 +97,6 @@ public class Cart<T extends Work> {
 
             totalPrice += b.getSellingPrice();
         }
-
 
         return totalPrice;
     }
@@ -115,13 +123,17 @@ public class Cart<T extends Work> {
 
         return totalPoints;
     }
-    
+
+    /**
+     * 
+     * @return a message for when the order is passed
+     */
     public String orderDoneMessage() {
         String msg = new String();
-        
+
         msg += "Order done : " + totalItemsShipped() + " articles bought for ";
         msg += String.format("%.2f", getPrice()) + " €";
-        
+
         return msg;
     }
 

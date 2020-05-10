@@ -12,7 +12,7 @@ import fr.uvsq.zumu_panchi.model.Bookshop;
 import fr.uvsq.zumu_panchi.model.Cart;
 import fr.uvsq.zumu_panchi.model.SalesJournal;
 import fr.uvsq.zumu_panchi.model.Stock;
-import fr.uvsq.zumu_panchi.model.StockDepletedException;
+import fr.uvsq.zumu_panchi.model.ItemOutOfStockException;
 import fr.uvsq.zumu_panchi.model.Work;
 import fr.uvsq.zumu_panchi.view.OrderPane;
 import fr.uvsq.zumu_panchi.view.SalesPane;
@@ -40,9 +40,9 @@ public class BookshopController implements MouseListener, ActionListener {
      * 
      * @param row
      * @param col
-     * @throws StockDepletedException
+     * @throws ItemOutOfStockException
      */
-    public void addItemToCart() throws StockDepletedException {
+    public void addItemToCart() throws ItemOutOfStockException {
         Stock<Work> item = this.getItemSelectedFromBookshop();
 
         Stock<Work> itemShipped = item.takeOutOneItem();
@@ -57,9 +57,9 @@ public class BookshopController implements MouseListener, ActionListener {
     /**
      * Remove an item from a cart
      * @param indexOfitemToRemove
-     * @throws StockDepletedException
+     * @throws ItemOutOfStockException
      */
-    public void removeItemFromCart(int indexOfitemToRemove) throws StockDepletedException {
+    public void removeItemFromCart(int indexOfitemToRemove) throws ItemOutOfStockException {
         Stock work = getItemSelectedFromCart();
 
         bookshop.increaseStock(work.getTitle());
@@ -102,7 +102,7 @@ public class BookshopController implements MouseListener, ActionListener {
                                     + " points ! The bookshop offers you a free book ! " + freeItem);
                             loyaltyPoints -= THRESHOLD;
                         }
-                    } catch (StockDepletedException e1) {
+                    } catch (ItemOutOfStockException e1) {
                         e1.printStackTrace();
                     }
                 } else {
@@ -134,7 +134,7 @@ public class BookshopController implements MouseListener, ActionListener {
                     int index = orderPane.getCartList().locationToIndex(e.getPoint());
                     this.removeItemFromCart(index);
                 }
-            } catch (StockDepletedException e1) {
+            } catch (ItemOutOfStockException e1) {
                 orderPane.notification("Item is out of stock :D !");
             }
         }

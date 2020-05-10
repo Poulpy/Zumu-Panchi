@@ -1,31 +1,29 @@
 package fr.uvsq.zumu_panchi.model;
 
 /**
- * Represents a certain quantity of works.
- * Indicates if the ebook is also available, and if the item
- * is a gift (= free)
- * TODO rename Item ?
+ * Set of identical works Indicates if the ebook is also available, and if the
+ * item is a gift (= free) TODO rename Item ?
  * 
  * @author paul
  *
  * @param <T>
  */
 public class Stock<T extends Work> {
-   
+
     /**
      * The item
      */
     private T work;
-    
+
     /**
      * Number of items stored
      */
     private int quantity = 0;
-    
+
     private boolean ebook = false;
-    
+
     /**
-     * Is it given / free ?
+     * Is it given / free ? TODO put that in Work
      */
     private boolean gift = false;
 
@@ -49,13 +47,20 @@ public class Stock<T extends Work> {
         this.work = work;
         this.quantity = quantity;
     }
-    
-    public Stock<T> takeOutOneItem() throws StockDepletedException {
+
+    /**
+     * Takes out one item of the set and returns it
+     * 
+     * @return
+     * @throws ItemOutOfStockException
+     */
+    public Stock<T> takeOutOneItem() throws ItemOutOfStockException {
         Stock<T> itemTaken = new Stock<T>(this.work, 1);
         this.decreaseStock();
-        
+
         return itemTaken;
     }
+
     /**
      * Increase the stock of the book by one
      */
@@ -64,20 +69,19 @@ public class Stock<T extends Work> {
     }
 
     /**
-     * Decrease the stock by one
-     * Can't go below zero
+     * Decrease the stock by one Can't go below zero
      */
-    public void decreaseStock() throws StockDepletedException {
+    public void decreaseStock() throws ItemOutOfStockException {
         if (this.quantity > 0) {
             this.quantity--;
         } else {
-            throw new StockDepletedException("There are no more items !");
+            throw new ItemOutOfStockException("There are no more items !");
         }
     }
-    
 
     /**
      * Put the attributes of the book to a string array
+     * 
      * @return
      */
     public String[] toStringArray() {
@@ -105,7 +109,6 @@ public class Stock<T extends Work> {
             return (((100 + work.margin) / 100f) * work.suppliersPrice) * quantity;
         }
     }
-    
 
     /**
      * 
@@ -114,11 +117,15 @@ public class Stock<T extends Work> {
     public float getCostPerUnit() {
         return (((100 + work.margin) / 100f) * work.suppliersPrice);
     }
-    
+
+    /**
+     * 
+     * @return the title of the item
+     */
     public String getTitle() {
         return this.work.getTitle();
     }
-    
+
     /**
      * 
      * @return the total of loyalty points gained for all items
@@ -126,24 +133,25 @@ public class Stock<T extends Work> {
     public int getLoyaltyPoints() {
         return this.work.loyaltyPoints * quantity;
     }
-    
+
     /**
      * @return the number of items stored
      */
     public int getQuantity() {
         return quantity;
     }
-    
+
     public String toString() {
         return work.title;
     }
-    
+
     public void setGift(boolean b) {
         this.gift = b;
     }
-    
+
     /**
      * Checks if the item is free
+     * 
      * @return a boolean indicating if the item's free
      */
     public boolean isGift() {
