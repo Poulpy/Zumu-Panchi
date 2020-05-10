@@ -14,13 +14,6 @@ public class Sale implements Comparable<Sale> {
         this.sellDate = new Date();
     }
 
-    public Date getSellDate() {
-        return sellDate;
-    }
-
-    public Cart getCart() {
-        return cart;
-    }
 
     @Override
     public int compareTo(Sale s) {

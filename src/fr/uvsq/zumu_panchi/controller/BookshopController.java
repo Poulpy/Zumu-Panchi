@@ -91,15 +91,19 @@ public class BookshopController implements MouseListener, ActionListener {
                     // TODO label
                     try {
                         freeItem = bookshop.offerRandomItem();
-                        cart.addItemToCart(freeItem);
-                        orderPane.updateBookshopView(this.bookshop);
-                        System.out.println("You've reached "
-                                + THRESHOLD
-                                + " points ! The bookshop offers you a free book !"
-                                + "\n" + freeItem);
-                        orderPane.notification("You've reached " + THRESHOLD
-                                + " points ! The bookshop offers you a free book ! " + freeItem);
-                        loyaltyPoints -= THRESHOLD;
+                        if (freeItem == null) {
+                            System.out.println("Couldn't find an item for you. Come next time !");
+                        } else {
+                            cart.addItemToCart(freeItem);
+                            orderPane.updateBookshopView(this.bookshop);
+                            System.out.println("You've reached "
+                                    + THRESHOLD
+                                    + " points ! The bookshop offers you a free book !"
+                                    + "\n" + freeItem);
+                            orderPane.notification("You've reached " + THRESHOLD
+                                    + " points ! The bookshop offers you a free book ! " + freeItem);
+                            loyaltyPoints -= THRESHOLD;
+                        }
                     } catch (StockDepletedException e1) {
                         e1.printStackTrace();
                     }

@@ -84,23 +84,6 @@ public class Bookshop<T extends Work> {
         this.products.get(title).increaseStock();
     }
 
-    /**
-     * Decrease the stock of a book by one
-     * 
-     * @param bookStockToDiminish
-     * @throws StockDepletedException 
-     */
-    public void decreaseStock(String bookStockToDiminish) throws StockDepletedException {
-        Stock<T> book = this.products.get(bookStockToDiminish);
-        book.decreaseStock();
-
-        this.products.replace(bookStockToDiminish, book);
-    }
-
-    public Map<String, Stock<T>> getStocks() {
-        return products;
-    }
-
     public Stock getWork(String work) {
         return this.products.get(work);
     }

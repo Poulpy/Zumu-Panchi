@@ -35,7 +35,9 @@ public class Cart<T extends Work> {
         if (items.get(item.getTitle()).getQuantity() == 1) {
             items.remove(item.getTitle());
         } else {
-            this.items.get(item.getTitle()).decreaseStock();
+            Stock s = this.items.get(item.getTitle());
+            s.decreaseStock();
+            items.put(item.getTitle(), s);
         }
     }
     
@@ -123,8 +125,5 @@ public class Cart<T extends Work> {
         
         return msg;
     }
-    
-    public void clear() {
-        this.items.clear();
-    }
+
 }

@@ -31,8 +31,4 @@ public class Book extends Work {
         this.margin = 20;
         this.loyaltyPoints = 30;
     }
-
-    public String getAuthor() {
-        return author;
-    }
 }

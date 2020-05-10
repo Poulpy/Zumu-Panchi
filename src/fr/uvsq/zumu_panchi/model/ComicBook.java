@@ -43,12 +43,4 @@ public class ComicBook extends Work {
             String author) {
         this(title, publisher, publishingYear, suppliersPrice, author, author);
     }
-
-    public String getScriptwriter() {
-        return scriptwriter;
-    }
-
-    public String getCartoonist() {
-        return cartoonist;
-    }
 }

@@ -54,7 +54,7 @@ public class OrderPane extends JPanel {
 
     private BookshopController bookshopController;
     
-    private JLabel totalLoyaltyPoints;
+    private JLabel cartInfo;
     
     private JLabel totalPrice;
     
@@ -103,10 +103,9 @@ public class OrderPane extends JPanel {
 
         orderCartButton = new JButton("Order");
         orderCartButton.addActionListener(bookshopController);
-        totalLoyaltyPoints = new JLabel();
-        totalLoyaltyPoints.setFont(new Font("Calibri", Font.PLAIN, 12));
-        totalPrice = new JLabel();
-        totalPrice.setFont(new Font("Calibri", Font.PLAIN, 12));
+        cartInfo = new JLabel();
+        cartInfo.setFont(new Font("Calibri", Font.PLAIN, 12));
+
         loyaltyPointsEarnedLabel = new JLabel("Your points    0");
         loyaltyPointsEarnedLabel.setFont(new Font("Calibri", Font.PLAIN, 12));
         this.setCartInformations(0, 0f);
@@ -144,10 +143,8 @@ public class OrderPane extends JPanel {
         c.gridheight = 1;
         c.gridy = 1;
         //c.fill = GridBagConstraints.NONE;
-        this.add(totalLoyaltyPoints, c);
+        this.add(cartInfo, c);
         
-        c.gridy = 2;
-        this.add(totalPrice, c);
         
         c.gridy = 3;
         this.add(orderCartButton, c);
@@ -186,14 +183,23 @@ public class OrderPane extends JPanel {
     }
     
     public void setCartInformations(int loyaltyPoints, float price) {
-        /*
-        String loyaltyTextLabel = "<html>Loyalty points <span align='right'>" + loyaltyPoints + "</span></html>";
-        String priceTextLabel =   "Total price    " + String.format("% 3.2f", price) + " €";
+        StringBuilder sb = new StringBuilder(128);
         
-        this.totalLoyaltyPoints.setText(loyaltyTextLabel);
-        this.totalPrice.setText(priceTextLabel);
-        */
-        setCartInfosString(loyaltyPoints, price);
+        sb.append("<html>");
+        sb.append("<table border='0'>");
+        sb.append("<tr>");
+        sb.append("<td align='left'>Loyalty points</td>");
+        sb.append(String.format("<td align='right'>%d</td>", loyaltyPoints));
+
+        sb.append("</tr>");
+        sb.append("<tr>");
+        sb.append("<td align='left'>Total price</td>");
+        sb.append(String.format("<td align='right'>%3.2f €</td>", price));
+        sb.append("</tr>");
+        sb.append("</table>");
+        sb.append("</html>");
+
+        cartInfo.setText(sb.toString());
     }
     
     public void updatePointsEarned(int newPoints) {
@@ -214,23 +220,7 @@ public class OrderPane extends JPanel {
     }
     
     public void setCartInfosString(int loyaltyPoints, float price) {
-        StringBuilder sb = new StringBuilder(128);
-    
-        sb.append("<html>");
-        sb.append("<table border='0'>");
-        sb.append("<tr>");
-        sb.append("<td align='left'>Loyalty points</td>");
-        sb.append(String.format("<td align='right'>%d</td>", loyaltyPoints));
 
-        sb.append("</tr>");
-        sb.append("<tr>");
-        sb.append("<td align='left'>Total price</td>");
-        sb.append(String.format("<td align='right'>%3.2f €</td>", price));
-        sb.append("</tr>");
-        sb.append("</table>");
-        sb.append("</html>");
-
-        totalLoyaltyPoints.setText(sb.toString());
     }
     
     private int alpha = 255;
