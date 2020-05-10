@@ -76,10 +76,8 @@ public class BookshopController implements MouseListener, ActionListener {
         Stock freeItem;
         
         if (e.getSource() == orderPane.getOrderCartButton()) {
-            System.out.println("Order ...");
             
             if (this.cart.totalItemsShipped() == 0) {
-                System.out.println("Cart is empty !");
                 orderPane.notification("Cart is empty !");
             } else {
                 // Adding the cart to the sales, and updating the view
@@ -87,24 +85,21 @@ public class BookshopController implements MouseListener, ActionListener {
                 
                 // if the user has more than 1000 points a book is given for free
                 if (loyaltyPoints >= THRESHOLD) {
-                    try {
-                        freeItem = bookshop.offerRandomItem();
-                        if (freeItem == null) {
-                            System.out.println("Couldn't find an item for you. Come next time !");
-                        } else {
-                            cart.addItemToCart(freeItem);
-                            orderPane.updateBookshopView(this.bookshop);
-                            System.out.println("You've reached "
-                                    + THRESHOLD
-                                    + " points ! The bookshop offers you a free book !"
-                                    + "\n" + freeItem);
-                            orderPane.notification("You've reached " + THRESHOLD
-                                    + " points ! The bookshop offers you a free book ! " + freeItem);
-                            loyaltyPoints -= THRESHOLD;
-                        }
-                    } catch (ItemOutOfStockException e1) {
-                        e1.printStackTrace();
+                    freeItem = bookshop.offerRandomItem();
+                    if (freeItem == null) {
+                        orderPane.notification("Couldn't find an item for you. Come next time !");
+                    } else {
+                        cart.addItemToCart(freeItem);
+                        orderPane.updateBookshopView(this.bookshop);
+                        System.out.println("You've reached "
+                                + THRESHOLD
+                                + " points ! The bookshop offers you a free book !"
+                                + "\n" + freeItem);
+                        orderPane.notification("You've reached " + THRESHOLD
+                                + " points ! The bookshop offers you a free book ! " + freeItem);
+                        loyaltyPoints -= THRESHOLD;
                     }
+  
                 } else {
                     orderPane.notification(cart.orderDoneMessage());
                 }

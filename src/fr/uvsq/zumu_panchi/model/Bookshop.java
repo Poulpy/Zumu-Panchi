@@ -141,7 +141,7 @@ public class Bookshop<T extends Work> {
      * @return the item
      * @throws ItemOutOfStockException
      */
-    public Stock<T> offerRandomItem() throws ItemOutOfStockException {
+    public Stock<T> offerRandomItem() {
         Stock<T> itemToOffer = null;
         boolean searchForBook = true;
         
@@ -154,7 +154,11 @@ public class Bookshop<T extends Work> {
             Stock<T> b = (Stock) mapping.getValue();
             
             if (b.getQuantity() != 0) {
-                itemToOffer = b.takeOutOneItem();
+                try {
+                    itemToOffer = b.takeOutOneItem();
+                } catch (ItemOutOfStockException e) {
+                    e.printStackTrace();
+                }
                 itemToOffer.setGift(true);
                 searchForBook = false;
             }
