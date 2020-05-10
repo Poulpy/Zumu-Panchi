@@ -34,16 +34,11 @@ public class SalesJournal {
         
        
         if (sales.containsKey(key)) {
-            
-            System.out.println("Contains key : " + key);
             salesToUpdate = sales.get(key);
         }
         
-        
         salesToUpdate.add(s);
         sales.put(key, salesToUpdate);
-        
-        System.out.println(Arrays.toString(sales.get(key).toArray()));
     }
     
     public List<String[]> getList() {
@@ -60,7 +55,6 @@ public class SalesJournal {
             
             for (Sale s : allSales) {
                 list.add(s.toStringArray());
-                System.out.println(s.toStringArray());
             }
         }
         

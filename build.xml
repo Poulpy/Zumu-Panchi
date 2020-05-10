@@ -5,7 +5,7 @@
 	</target>
 	
     <target name="javadoc">
-        <javadoc access="public" author="true" classpath="." destdir="docs" nodeprecated="false" nodeprecatedlist="false" noindex="false" nonavbar="false" notree="false" packagenames="fr.uvsq.zumu_panchi.controller,fr.uvsq.zumu_panchi.model,fr.uvsq.zumu_panchi.view,fr.uvsq.zumu_panchi" source="1.8" sourcepath="src" splitindex="true" use="true" version="true"/>
+        <javadoc access="public" author="true" classpath="." destdir="docs" nodeprecated="false" nodeprecatedlist="false" noindex="false" nonavbar="false" notree="false" packagenames="fr.uvsq.zumu_panchi.controller,fr.uvsq.zumu_panchi.model,fr.uvsq.zumu_panchi.view,fr.uvsq.zumu_panchi.test,fr.uvsq.zumu_panchi" source="1.8" sourcepath="src" splitindex="true" use="true" version="true"/>
     </target>
 	
     <!--this file was created by Eclipse Runnable JAR Export Wizard-->
