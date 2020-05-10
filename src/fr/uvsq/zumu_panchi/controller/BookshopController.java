@@ -79,7 +79,6 @@ public class BookshopController implements MouseListener, ActionListener {
             System.out.println("Order ...");
             
             if (this.cart.totalItemsShipped() == 0) {
-                // TODO label indicating cart is empty
                 System.out.println("Cart is empty !");
                 orderPane.notification("Cart is empty !");
             } else {
@@ -88,7 +87,6 @@ public class BookshopController implements MouseListener, ActionListener {
                 
                 // if the user has more than 1000 points a book is given for free
                 if (loyaltyPoints >= THRESHOLD) {
-                    // TODO label
                     try {
                         freeItem = bookshop.offerRandomItem();
                         if (freeItem == null) {
@@ -158,30 +156,6 @@ public class BookshopController implements MouseListener, ActionListener {
         return this.bookshop.getWork((String) table.getValueAt(row, 0));
     }
 
-    @Override
-    public void mousePressed(MouseEvent e) {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public void mouseReleased(MouseEvent e) {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public void mouseEntered(MouseEvent e) {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public void mouseExited(MouseEvent e) {
-        // TODO Auto-generated method stub
-
-    }
-
     public void setOrderPane(OrderPane orderPane) {
         this.orderPane = orderPane;
     }
@@ -200,5 +174,23 @@ public class BookshopController implements MouseListener, ActionListener {
 
     public SalesJournal getSalesJournal() {
         return this.salesJournal;
+    }
+
+    // Methods not used
+    
+    @Override
+    public void mousePressed(MouseEvent e) {
+    }
+    
+    @Override
+    public void mouseReleased(MouseEvent e) {
+    }
+    
+    @Override
+    public void mouseEntered(MouseEvent e) {
+    }
+    
+    @Override
+    public void mouseExited(MouseEvent e) {
     }
 }

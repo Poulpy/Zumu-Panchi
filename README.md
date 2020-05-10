@@ -22,6 +22,5 @@ To generate the jar run :
 
 # TODO
 
-- add labels to show some flash info
--set the laf
+
 
