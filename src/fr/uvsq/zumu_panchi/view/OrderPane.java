@@ -63,7 +63,8 @@ public class OrderPane extends JPanel {
     private JLabel notificationLabel;
 
     private int alpha = 255;
-    private int increment = -5;
+    private int increment = -10;
+    private final String EMPTY_TEXT = "                   ";
 
     public OrderPane(BookshopController bookshopController) {
         super();
@@ -80,7 +81,7 @@ public class OrderPane extends JPanel {
         title = new JLabel("Order");
         title.setFont(new Font("Calibri", Font.BOLD, 30));
 
-        notificationLabel = new JLabel();
+        notificationLabel = new JLabel(EMPTY_TEXT);
         notificationLabel.setFont(new Font("Calibri", Font.PLAIN, 12));
 
         // bookshop
@@ -113,7 +114,7 @@ public class OrderPane extends JPanel {
         this.setCartInformations(0, 0f);
 
         GridBagConstraints c = new GridBagConstraints();
-        // c.insets = new Insets(6, 6, 6, 6);
+        c.insets = new Insets(6, 6, 6, 6);
 
         // c.anchor = GridBagConstraints.WEST;
         c.weightx = 1.0;
@@ -135,22 +136,25 @@ public class OrderPane extends JPanel {
         c.weightx = 1.0;
         c.gridx = 1;
         this.add(listScroller, c);
+        
 
         c.gridx = 2;
         c.weightx = 1.0;
 
         c.gridheight = 1;
         c.gridy = 1;
-        // c.fill = GridBagConstraints.NONE;
+        
         this.add(cartInfo, c);
 
         c.gridy = 3;
         this.add(orderCartButton, c);
 
         c.gridx = 0;
-        c.gridy = 4;
-        c.gridwidth = 2;
-        // c.fill = GridBagConstraints.PAGE_END;
+        c.gridy = 5;
+        c.gridwidth = 3;
+        c.weighty = 1.0;
+        c.anchor = GridBagConstraints.LINE_START;
+        c.insets = new Insets(6, 6, 6, 6);
         this.add(notificationLabel, c);
 
     }
@@ -222,7 +226,8 @@ public class OrderPane extends JPanel {
                 alpha += increment;
 
                 if (alpha <= 0) {
-                    notificationLabel.setText("");
+                    notificationLabel.setText(EMPTY_TEXT);
+                    alpha = 0;
                     ((Timer) e.getSource()).stop();
                 }
 

@@ -106,7 +106,6 @@ public class Bookshop<T extends Work> {
             Work w = new ComicBook(args[0], args[1], Integer.parseInt(args[2]), Float.parseFloat(args[3]), args[5]);
             Stock s = new Stock(w, Integer.parseInt(args[4]));
             this.products.put(args[0], s);
-            System.out.println(s);
         }
         
         reader.close();
@@ -124,7 +123,6 @@ public class Bookshop<T extends Work> {
             Work w = new Book(args[0], args[1], Integer.parseInt(args[2]), Float.parseFloat(args[3]), args[5]);
             Stock s = new Stock(w, Integer.parseInt(args[4]));
             this.products.put(args[0], s);
-            System.out.println(s);
         }
         
         reader.close();
