@@ -22,6 +22,7 @@ public class BookshopController implements MouseListener, ActionListener {
     private Bookshop bookshop;
     private Cart cart;
     private SalesJournal salesJournal;
+    private int loyaltyPoints;
     
     private SalesPane salesPane;
     private OrderPane orderPane;
@@ -30,6 +31,7 @@ public class BookshopController implements MouseListener, ActionListener {
         this.bookshop = bookshop;
         this.cart = cart;
         this.salesJournal = salesJournal;
+        this.loyaltyPoints = 0;
     }
 
     /**
@@ -51,6 +53,11 @@ public class BookshopController implements MouseListener, ActionListener {
         orderPane.setCartInformations(this.cart.getLoyaltyPoints(), this.cart.getPrice());
     }
 
+    /**
+     * Remove an item from a cart
+     * @param indexOfitemToRemove
+     * @throws StockDepletedException
+     */
     public void removeItemFromCart(int indexOfitemToRemove) throws StockDepletedException {
         Stock work = getItemSelectedFromCart();
 
@@ -74,7 +81,8 @@ public class BookshopController implements MouseListener, ActionListener {
             } else {
                 salesJournal.addCart(this.cart);
                 salesPane.updateSalesView(salesJournal);
-                this.orderPane.updatePointsEarned(this.cart.getLoyaltyPoints());
+                loyaltyPoints += this.cart.getLoyaltyPoints();
+                this.orderPane.updatePointsEarned(loyaltyPoints);
                 this.cart = new Cart();
                 this.orderPane.clearCartList();
                 this.orderPane.setCartInformations(0, 0f);

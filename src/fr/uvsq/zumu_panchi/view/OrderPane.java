@@ -168,14 +168,9 @@ public class OrderPane extends JPanel {
         this.totalLoyaltyPoints.setText(loyaltyTextLabel);
         this.totalPrice.setText(priceTextLabel);
     }
-
-    // TODO not flexible
-    public int getCurrentPoints() {
-        return Integer.parseInt(this.loyaltyPointsEarnedLabel.getText().split("    ")[1]);
-    }
     
     public void updatePointsEarned(int newPoints) {
-        this.loyaltyPointsEarnedLabel.setText("Your points    " + (getCurrentPoints() + newPoints));
+        this.loyaltyPointsEarnedLabel.setText("Your points    " + newPoints);
     }
     
     public void updateBookshopView(Bookshop b) {
