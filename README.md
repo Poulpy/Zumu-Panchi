@@ -22,8 +22,6 @@ To generate the jar run :
 
 # TODO
 
-
-- Offer a work when user has reached 1000 points, and clear 1000 points then after
-
-- add test task to ant build file
+- add labels to show some flash info
+-set the laf
 
