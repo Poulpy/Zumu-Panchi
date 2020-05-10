@@ -1,4 +1,4 @@
-package fr.uvsq.zumu_panchi.test;
+package test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
