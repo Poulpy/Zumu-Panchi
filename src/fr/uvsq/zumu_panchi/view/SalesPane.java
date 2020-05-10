@@ -4,18 +4,13 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.io.IOException;
 
-import javax.swing.DefaultListModel;
-import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
 import fr.uvsq.zumu_panchi.controller.BookshopController;
-import fr.uvsq.zumu_panchi.model.Bookshop;
 import fr.uvsq.zumu_panchi.model.SalesJournal;
 
 public class SalesPane extends JPanel {

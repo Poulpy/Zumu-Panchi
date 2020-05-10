@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
 
-import fr.uvsq.zumu_panchi.model.Bookshop;
 import fr.uvsq.zumu_panchi.model.SalesJournal;
 
 public class SalesTable extends AbstractTableModel {

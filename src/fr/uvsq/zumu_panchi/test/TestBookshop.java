@@ -1,6 +1,6 @@
 package fr.uvsq.zumu_panchi.test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.IOException;
 

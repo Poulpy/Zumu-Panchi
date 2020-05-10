@@ -4,9 +4,7 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.io.IOException;
 
-import javax.swing.BoxLayout;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -18,7 +16,6 @@ import javax.swing.JTable;
 import fr.uvsq.zumu_panchi.controller.BookshopController;
 import fr.uvsq.zumu_panchi.model.Bookshop;
 import fr.uvsq.zumu_panchi.model.Cart;
-import fr.uvsq.zumu_panchi.model.SalesJournal;
 
 @SuppressWarnings("serial")
 /**

@@ -2,9 +2,7 @@ package fr.uvsq.zumu_panchi.view;
 
 import java.awt.Toolkit;
 import java.io.IOException;
-import java.net.URISyntaxException;
 
-import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JTabbedPane;
@@ -13,7 +11,6 @@ import fr.uvsq.zumu_panchi.controller.BookshopController;
 import fr.uvsq.zumu_panchi.model.Bookshop;
 import fr.uvsq.zumu_panchi.model.Cart;
 import fr.uvsq.zumu_panchi.model.SalesJournal;
-import javafx.scene.image.Image;
 
 @SuppressWarnings("serial")
 /**
