@@ -81,14 +81,15 @@ public class Bookshop<T extends Work> {
      * @param title
      */
     public void increaseStock(String title) {
-        this.products.get(title).increaseStock();
+        products.get(title).increaseStock();
     }
 
     public Stock getWork(String work) {
-        return this.products.get(work);
+        return products.get(work);
     }
 
     /**
+     * Parse a csv file to seed the bookshop of comicbooks
      * Format Name, Publisher, Publishing Year, Price, Stock, Author
      * 
      * 
@@ -105,12 +106,18 @@ public class Bookshop<T extends Work> {
             String args[] = line.split(",");
             Work w = new ComicBook(args[0], args[1], Integer.parseInt(args[2]), Float.parseFloat(args[3]), args[5]);
             Stock s = new Stock(w, Integer.parseInt(args[4]));
-            this.products.put(args[0], s);
+            
+            products.put(args[0], s);
         }
         
         reader.close();
     }
 
+    /**
+     * Parse a csv file to seed the bookshop of books
+     * @param pathToFile
+     * @throws IOException
+     */
     public void seedBooks(String pathToFile) throws IOException {
         InputStream res = Bookshop.class.getResourceAsStream("/" + pathToFile);
 
@@ -122,12 +129,18 @@ public class Bookshop<T extends Work> {
             String args[] = line.split(",");
             Work w = new Book(args[0], args[1], Integer.parseInt(args[2]), Float.parseFloat(args[3]), args[5]);
             Stock s = new Stock(w, Integer.parseInt(args[4]));
+            
             this.products.put(args[0], s);
         }
         
         reader.close();
     }
     
+    /**
+     * Take a random item from the bookshop
+     * @return the item
+     * @throws ItemOutOfStockException
+     */
     public Stock<T> offerRandomItem() throws ItemOutOfStockException {
         Stock<T> itemToOffer = null;
         boolean searchForBook = true;
@@ -142,6 +155,7 @@ public class Bookshop<T extends Work> {
             
             if (b.getQuantity() != 0) {
                 itemToOffer = b.takeOutOneItem();
+                itemToOffer.setGift(true);
                 searchForBook = false;
             }
         }
