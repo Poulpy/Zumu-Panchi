@@ -114,9 +114,11 @@ public class OrderPane extends JPanel {
         c.gridy = 1;
         c.fill = GridBagConstraints.BOTH;
         c.weighty = 3.0;
+        c.weightx = 4.0;
         c.gridheight = 3;
         this.add(new JScrollPane(this.table), c);
         
+        c.weightx = 1.0;
         c.gridx = 1;
         this.add(listScroller, c);
         

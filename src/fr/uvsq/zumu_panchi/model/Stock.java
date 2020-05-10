@@ -7,6 +7,8 @@ public class Stock<T extends Work> {
     private int quantity = 0;
     
     private boolean ebook = false;
+    
+    private boolean gift = false;
 
     /**
      * The number of points a customer earns after buying the work
@@ -92,5 +94,17 @@ public class Stock<T extends Work> {
     
     public int getQuantity() {
         return this.quantity;
+    }
+    
+    public String toString() {
+        return work.title;
+    }
+    
+    public void setGift(boolean b) {
+        this.gift = true;
+    }
+    
+    public boolean isGift() {
+        return this.gift;
     }
 }

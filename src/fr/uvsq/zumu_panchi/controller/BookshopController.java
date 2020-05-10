@@ -20,14 +20,15 @@ import fr.uvsq.zumu_panchi.view.SalesPane;
 public class BookshopController implements MouseListener, ActionListener {
 
     private Bookshop bookshop;
-    private Cart cart;
+    private Cart<Work> cart;
     private SalesJournal salesJournal;
     private int loyaltyPoints;
+    private final int THRESHOLD = 200;
     
     private SalesPane salesPane;
     private OrderPane orderPane;
 
-    public BookshopController(Bookshop bookshop, Cart cart, SalesJournal salesJournal) {
+    public BookshopController(Bookshop bookshop, Cart<Work> cart, SalesJournal salesJournal) {
         this.bookshop = bookshop;
         this.cart = cart;
         this.salesJournal = salesJournal;
@@ -42,7 +43,7 @@ public class BookshopController implements MouseListener, ActionListener {
      * @throws StockDepletedException
      */
     public void addItemToCart() throws StockDepletedException {
-        Stock item = this.getItemSelectedFromBookshop();
+        Stock<Work> item = this.getItemSelectedFromBookshop();
 
         Stock<Work> itemShipped = item.takeOutOneItem();
         cart.addItemToCart(itemShipped);
@@ -72,20 +73,42 @@ public class BookshopController implements MouseListener, ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == this.orderPane.getOrderCartButton()) {
+        Stock freeItem;
+        
+        if (e.getSource() == orderPane.getOrderCartButton()) {
             System.out.println("Order ...");
             
             if (this.cart.totalItemsShipped() == 0) {
                 // TODO label indicating cart is empty
                 System.out.println("Cart is empty !");
             } else {
-                salesJournal.addCart(this.cart);
+                // Adding the cart to the sales, and updating the view
+                loyaltyPoints += cart.getLoyaltyPoints();
+                
+                // if the user has more than 1000 points a book is given for free
+                if (loyaltyPoints >= THRESHOLD) {
+                    // TODO label
+                    try {
+                        freeItem = bookshop.offerRandomItem();
+                        cart.addItemToCart(freeItem);
+                        orderPane.updateBookshopView(this.bookshop);
+                        System.out.println("You've reached "
+                                + THRESHOLD
+                                + " points ! The bookshop offers you a free book !"
+                                + "\n" + freeItem);
+                        loyaltyPoints -= THRESHOLD;
+                    } catch (StockDepletedException e1) {
+                        e1.printStackTrace();
+                    }
+                }
+                
+                salesJournal.addCart(cart);
                 salesPane.updateSalesView(salesJournal);
-                loyaltyPoints += this.cart.getLoyaltyPoints();
-                this.orderPane.updatePointsEarned(loyaltyPoints);
-                this.cart = new Cart();
-                this.orderPane.clearCartList();
-                this.orderPane.setCartInformations(0, 0f);
+                
+                orderPane.updatePointsEarned(loyaltyPoints);
+                cart = new Cart<Work>();
+                orderPane.clearCartList();
+                orderPane.setCartInformations(0, 0f);
             }
         }
     }
@@ -122,7 +145,7 @@ public class BookshopController implements MouseListener, ActionListener {
         return this.bookshop.getWork(itemToRemove);
     }
 
-    public Stock getItemSelectedFromBookshop() {
+    public Stock<Work> getItemSelectedFromBookshop() {
         JTable table = orderPane.getTable();
 
         int row = table.getSelectedRow();

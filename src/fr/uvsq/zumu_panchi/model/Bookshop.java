@@ -123,6 +123,7 @@ public class Bookshop<T extends Work> {
             Work w = new ComicBook(args[0], args[1], Integer.parseInt(args[2]), Float.parseFloat(args[3]), args[5]);
             Stock s = new Stock(w, Integer.parseInt(args[4]));
             this.products.put(args[0], s);
+            System.out.println(s);
         }
         
         reader.close();
@@ -140,6 +141,7 @@ public class Bookshop<T extends Work> {
             Work w = new Book(args[0], args[1], Integer.parseInt(args[2]), Float.parseFloat(args[3]), args[5]);
             Stock s = new Stock(w, Integer.parseInt(args[4]));
             this.products.put(args[0], s);
+            System.out.println(s);
         }
         
         reader.close();
@@ -147,15 +149,19 @@ public class Bookshop<T extends Work> {
     
     public Stock<T> offerRandomItem() throws StockDepletedException {
         Stock<T> itemToOffer = null;
+        boolean searchForBook = true;
         
         Set<Map.Entry<String, Stock<T>>> entries = products.entrySet();
         Iterator<Entry<String, Stock<T>>> entriesIterator = entries.iterator();
 
-        if (entriesIterator.hasNext()) {
+        // we search for a book that is still in stock
+        if (entriesIterator.hasNext() && searchForBook) {
             Map.Entry mapping = (Map.Entry) entriesIterator.next();
             Stock<T> b = (Stock) mapping.getValue();
+            
             if (b.getQuantity() != 0) {
                 itemToOffer = b.takeOutOneItem();
+                searchForBook = false;
             }
         }
         

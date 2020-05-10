@@ -84,7 +84,8 @@ public class Cart<T extends Work> {
             Map.Entry mapping = (Map.Entry) entriesIterator.next();
             Stock<T> b = (Stock) mapping.getValue();
 
-            totalPrice += b.getSellingPrice();
+            if (!b.isGift())
+                totalPrice += b.getSellingPrice();
         }
 
 
