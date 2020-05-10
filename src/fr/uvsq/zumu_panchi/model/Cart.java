@@ -115,6 +115,15 @@ public class Cart<T extends Work> {
         return totalPoints;
     }
     
+    public String orderDoneMessage() {
+        String msg = new String();
+        
+        msg += "Order done : " + totalItemsShipped() + " articles bought for ";
+        msg += String.format("%.2f", getPrice()) + " €";
+        
+        return msg;
+    }
+    
     public void clear() {
         this.items.clear();
     }

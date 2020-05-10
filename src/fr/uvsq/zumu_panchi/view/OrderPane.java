@@ -15,6 +15,7 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
 import javax.swing.Timer;
 
 import fr.uvsq.zumu_panchi.controller.BookshopController;
@@ -78,16 +79,17 @@ public class OrderPane extends JPanel {
         title.setFont(new Font("Calibri", Font.BOLD, 30));
         
         notificationLabel = new JLabel();
-        notificationLabel.setFont(new Font("Calibri", Font.ITALIC, 9));
+        notificationLabel.setFont(new Font("Calibri", Font.PLAIN, 12));
 
         // bookshop
-        this.modelTable = new WorksTable(this.bookshop);
-        this.table = new JTable(this.modelTable);
-        this.table.setRowHeight(30);
+        modelTable = new WorksTable(bookshop);
+        table = new JTable(modelTable);
+        table.setRowHeight(30);
+        table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         table.getColumnModel().getColumn(2).setPreferredWidth(10);
         table.getColumnModel().getColumn(3).setPreferredWidth(5);
         table.getColumnModel().getColumn(4).setPreferredWidth(5);
-        this.table.addMouseListener(bookshopController);
+        table.addMouseListener(bookshopController);
 
         // cart
         cartListModel = new DefaultListModel<String>();
@@ -102,22 +104,23 @@ public class OrderPane extends JPanel {
         orderCartButton = new JButton("Order");
         orderCartButton.addActionListener(bookshopController);
         totalLoyaltyPoints = new JLabel();
+        totalLoyaltyPoints.setFont(new Font("Calibri", Font.PLAIN, 12));
         totalPrice = new JLabel();
+        totalPrice.setFont(new Font("Calibri", Font.PLAIN, 12));
         loyaltyPointsEarnedLabel = new JLabel("Your points    0");
+        loyaltyPointsEarnedLabel.setFont(new Font("Calibri", Font.PLAIN, 12));
         this.setCartInformations(0, 0f);
 
         
         GridBagConstraints c = new GridBagConstraints();
-        c.insets = new Insets(6, 6, 6, 6);
+        //c.insets = new Insets(6, 6, 6, 6);
         
-        c.anchor = GridBagConstraints.WEST;
+        //c.anchor = GridBagConstraints.WEST;
         c.weightx = 1.0;
         c.gridx = 0;
         c.gridy = 0;
         this.add(title, c);
-        
-        c.gridx = 1;
-        this.add(notificationLabel, c);
+
         
         c.gridx = 2;
         this.add(loyaltyPointsEarnedLabel, c);
@@ -140,7 +143,7 @@ public class OrderPane extends JPanel {
         
         c.gridheight = 1;
         c.gridy = 1;
-        c.fill = GridBagConstraints.NONE;
+        //c.fill = GridBagConstraints.NONE;
         this.add(totalLoyaltyPoints, c);
         
         c.gridy = 2;
@@ -148,6 +151,13 @@ public class OrderPane extends JPanel {
         
         c.gridy = 3;
         this.add(orderCartButton, c);
+        
+        
+        c.gridx = 0;
+        c.gridy = 4;
+        c.gridwidth = 2;
+        //c.fill = GridBagConstraints.PAGE_END;
+        this.add(notificationLabel, c);
         
     }
 
@@ -176,11 +186,14 @@ public class OrderPane extends JPanel {
     }
     
     public void setCartInformations(int loyaltyPoints, float price) {
-        String loyaltyTextLabel = "Loyalty points    " + loyaltyPoints;
-        String priceTextLabel = "Total price    " + String.format("%3.2f", price) + " €";
+        /*
+        String loyaltyTextLabel = "<html>Loyalty points <span align='right'>" + loyaltyPoints + "</span></html>";
+        String priceTextLabel =   "Total price    " + String.format("% 3.2f", price) + " €";
         
         this.totalLoyaltyPoints.setText(loyaltyTextLabel);
         this.totalPrice.setText(priceTextLabel);
+        */
+        setCartInfosString(loyaltyPoints, price);
     }
     
     public void updatePointsEarned(int newPoints) {
@@ -198,6 +211,26 @@ public class OrderPane extends JPanel {
     
     public void removeItemFromCart(int index) {
         cartListModel.remove(index);
+    }
+    
+    public void setCartInfosString(int loyaltyPoints, float price) {
+        StringBuilder sb = new StringBuilder(128);
+    
+        sb.append("<html>");
+        sb.append("<table border='0'>");
+        sb.append("<tr>");
+        sb.append("<td align='left'>Loyalty points</td>");
+        sb.append(String.format("<td align='right'>%d</td>", loyaltyPoints));
+
+        sb.append("</tr>");
+        sb.append("<tr>");
+        sb.append("<td align='left'>Total price</td>");
+        sb.append(String.format("<td align='right'>%3.2f €</td>", price));
+        sb.append("</tr>");
+        sb.append("</table>");
+        sb.append("</html>");
+
+        totalLoyaltyPoints.setText(sb.toString());
     }
     
     private int alpha = 255;

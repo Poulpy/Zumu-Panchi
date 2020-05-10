@@ -103,6 +103,8 @@ public class BookshopController implements MouseListener, ActionListener {
                     } catch (StockDepletedException e1) {
                         e1.printStackTrace();
                     }
+                } else {
+                    orderPane.notification(cart.orderDoneMessage());
                 }
                 
                 salesJournal.addCart(cart);
@@ -115,10 +117,7 @@ public class BookshopController implements MouseListener, ActionListener {
             }
         }
     }
-    
-    public void updateSalesView() {
-        
-    }
+
 
     @Override
     public void mouseClicked(MouseEvent e) {
