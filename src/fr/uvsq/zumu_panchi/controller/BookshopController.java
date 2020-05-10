@@ -137,8 +137,7 @@ public class BookshopController implements MouseListener, ActionListener {
                     this.removeItemFromCart(index);
                 }
             } catch (StockDepletedException e1) {
-                // TODO label indicating stock is 0
-                e1.printStackTrace();
+                orderPane.notification("Item is out of stock :D !");
             }
         }
     }
