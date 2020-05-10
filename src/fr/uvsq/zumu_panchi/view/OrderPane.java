@@ -1,9 +1,12 @@
 package fr.uvsq.zumu_panchi.view;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
@@ -12,6 +15,7 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.Timer;
 
 import fr.uvsq.zumu_panchi.controller.BookshopController;
 import fr.uvsq.zumu_panchi.model.Bookshop;
@@ -48,28 +52,32 @@ public class OrderPane extends JPanel {
     private Cart cart;
 
     private BookshopController bookshopController;
-    
+
     private JLabel totalLoyaltyPoints;
-    
+
     private JLabel totalPrice;
-    
+
     private JLabel loyaltyPointsEarnedLabel;
+
+    private JLabel notificationLabel;
 
     public OrderPane(BookshopController bookshopController) {
         super();
-        
+
         this.bookshopController = bookshopController;
         this.cart = bookshopController.getCart();
         this.bookshop = bookshopController.getBookshop();
         this.bookshopController.setOrderPane(this);
-        
-        JLabel title;
-        
-        this.setLayout(new GridBagLayout());
 
+        JLabel title;
+
+        this.setLayout(new GridBagLayout());
 
         title = new JLabel("Order");
         title.setFont(new Font("Calibri", Font.BOLD, 30));
+
+        notificationLabel = new JLabel();
+        notificationLabel.setFont(new Font("Calibri", Font.ITALIC, 9));
 
         // bookshop
         this.modelTable = new WorksTable(this.bookshop);
@@ -84,7 +92,7 @@ public class OrderPane extends JPanel {
         cartListModel = new DefaultListModel<String>();
         cartList = new JList<String>(cartListModel);
         cartList.setLayoutOrientation(JList.VERTICAL);
-        
+
         cartList.addMouseListener(bookshopController);
         JScrollPane listScroller = new JScrollPane(cartList);
 
@@ -97,19 +105,21 @@ public class OrderPane extends JPanel {
         loyaltyPointsEarnedLabel = new JLabel("Your points    0");
         this.setCartInformations(0, 0f);
 
-        
         GridBagConstraints c = new GridBagConstraints();
         c.insets = new Insets(6, 6, 6, 6);
-        
+
         c.anchor = GridBagConstraints.WEST;
         c.weightx = 1.0;
         c.gridx = 0;
         c.gridy = 0;
         this.add(title, c);
-        
+
+        c.gridx = 1;
+        this.add(notificationLabel, c);
+
         c.gridx = 2;
         this.add(loyaltyPointsEarnedLabel, c);
-        
+
         c.gridx = 0;
         c.gridy = 1;
         c.fill = GridBagConstraints.BOTH;
@@ -117,26 +127,25 @@ public class OrderPane extends JPanel {
         c.weightx = 4.0;
         c.gridheight = 3;
         this.add(new JScrollPane(this.table), c);
-        
+
         c.weightx = 1.0;
         c.gridx = 1;
         this.add(listScroller, c);
-        
-        
+
         c.gridx = 2;
         c.weightx = 1.0;
-        
+
         c.gridheight = 1;
         c.gridy = 1;
         c.fill = GridBagConstraints.NONE;
         this.add(totalLoyaltyPoints, c);
-        
+
         c.gridy = 2;
         this.add(totalPrice, c);
-        
+
         c.gridy = 3;
         this.add(orderCartButton, c);
-        
+
     }
 
     public JTable getTable() {
@@ -158,33 +167,54 @@ public class OrderPane extends JPanel {
     public JButton getOrderCartButton() {
         return this.orderCartButton;
     }
-    
+
     public void clearCartList() {
         this.cartListModel.clear();
     }
-    
+
     public void setCartInformations(int loyaltyPoints, float price) {
         String loyaltyTextLabel = "Loyalty points    " + loyaltyPoints;
         String priceTextLabel = "Total price    " + String.format("%3.2f", price) + " €";
-        
+
         this.totalLoyaltyPoints.setText(loyaltyTextLabel);
         this.totalPrice.setText(priceTextLabel);
     }
-    
+
     public void updatePointsEarned(int newPoints) {
         this.loyaltyPointsEarnedLabel.setText("Your points    " + newPoints);
     }
-    
+
     public void updateBookshopView(Bookshop b) {
         modelTable.update(bookshop);
         modelTable.fireTableDataChanged();
     }
-    
+
     public void addItemToCart(String title) {
         cartListModel.addElement(title);
     }
-    
+
     public void removeItemFromCart(int index) {
         cartListModel.remove(index);
+    }
+
+    private int alpha = 255;
+    private int increment = -5;
+
+    public void notification(String msg) {
+        notificationLabel.setText(msg);
+        Timer t = new Timer(3000, new ActionListener() {
+
+            public void actionPerformed(ActionEvent e) {
+                /*
+                 * alpha += increment; if (alpha >= 255) { alpha = 255; increment = -increment;
+                 * } if (alpha <= 0) { alpha = 0; increment = -increment; }
+                 * notificationLabel.setForeground(new Color(0, 0, 0, alpha));
+                 */
+                notificationLabel.setText("");
+            }
+        });
+
+        t.setRepeats(false);
+        t.start();
     }
 }

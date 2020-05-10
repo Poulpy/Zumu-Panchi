@@ -22,13 +22,13 @@ class TestBookshop {
     void testSeedComicBooks() throws IOException {
         this.b.seedComicBooks("comic_books.csv");
         System.out.println(this.b.getStocks());
-        assertEquals(this.b.getStocks().keySet().size(), 4);
+        assertEquals(this.b.getStocks().keySet().size(), 5);
     }
 
     @Test
     void testSeedBooks() throws IOException {
         this.b.seedComicBooks("books.csv");
         System.out.println(this.b.getStocks());
-        assertEquals(this.b.getStocks().keySet().size(), 1);
+        assertEquals(this.b.getStocks().keySet().size(), 3);
     }
 }

@@ -81,6 +81,7 @@ public class BookshopController implements MouseListener, ActionListener {
             if (this.cart.totalItemsShipped() == 0) {
                 // TODO label indicating cart is empty
                 System.out.println("Cart is empty !");
+                orderPane.notification("Cart is empty !");
             } else {
                 // Adding the cart to the sales, and updating the view
                 loyaltyPoints += cart.getLoyaltyPoints();
@@ -96,6 +97,8 @@ public class BookshopController implements MouseListener, ActionListener {
                                 + THRESHOLD
                                 + " points ! The bookshop offers you a free book !"
                                 + "\n" + freeItem);
+                        orderPane.notification("You've reached " + THRESHOLD
+                                + " points ! The bookshop offers you a free book ! " + freeItem);
                         loyaltyPoints -= THRESHOLD;
                     } catch (StockDepletedException e1) {
                         e1.printStackTrace();
