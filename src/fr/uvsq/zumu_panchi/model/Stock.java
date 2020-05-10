@@ -1,13 +1,32 @@
 package fr.uvsq.zumu_panchi.model;
 
+/**
+ * Represents a certain quantity of works.
+ * Indicates if the ebook is also available, and if the item
+ * is a gift (= free)
+ * TODO rename Item ?
+ * 
+ * @author paul
+ *
+ * @param <T>
+ */
 public class Stock<T extends Work> {
-    
+   
+    /**
+     * The item
+     */
     private T work;
     
+    /**
+     * Number of items stored
+     */
     private int quantity = 0;
     
     private boolean ebook = false;
     
+    /**
+     * Is it given / free ?
+     */
     private boolean gift = false;
 
     /**
@@ -75,25 +94,44 @@ public class Stock<T extends Work> {
         return str;
     }
 
+    /**
+     * 
+     * @return the total cost of the items
+     */
     public float getSellingPrice() {
-        return (((100 + this.margin) / 100f) * this.work.suppliersPrice) * this.quantity;
+        if (gift) {
+            return 0f;
+        } else {
+            return (((100 + work.margin) / 100f) * work.suppliersPrice) * quantity;
+        }
     }
     
 
+    /**
+     * 
+     * @return the cost of an item
+     */
     public float getCostPerUnit() {
-        return (((100 + this.margin) / 100f) * this.work.suppliersPrice);
+        return (((100 + work.margin) / 100f) * work.suppliersPrice);
     }
     
     public String getTitle() {
         return this.work.getTitle();
     }
     
+    /**
+     * 
+     * @return the total of loyalty points gained for all items
+     */
     public int getLoyaltyPoints() {
-        return this.work.loyaltyPoints * this.quantity;
+        return this.work.loyaltyPoints * quantity;
     }
     
+    /**
+     * @return the number of items stored
+     */
     public int getQuantity() {
-        return this.quantity;
+        return quantity;
     }
     
     public String toString() {
@@ -101,9 +139,13 @@ public class Stock<T extends Work> {
     }
     
     public void setGift(boolean b) {
-        this.gift = true;
+        this.gift = b;
     }
     
+    /**
+     * Checks if the item is free
+     * @return a boolean indicating if the item's free
+     */
     public boolean isGift() {
         return this.gift;
     }

@@ -17,10 +17,17 @@ public class Work {
 
     protected String publisher;
 
+    /**
+     * Year the work was published
+     */
     protected int publishingYear;
 
+    /**
+     * Price of the supplier
+     */
     protected float suppliersPrice;
 
+    
     /**
      * The number of points a customer earns after buying the work
      */
