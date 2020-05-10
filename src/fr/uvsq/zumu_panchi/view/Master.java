@@ -58,12 +58,11 @@ public class Master extends JFrame {
         super(TITLE);
         setSize(WIDTH, HEIGHT);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        
+    }
+    
+    public void initGUI() {
         initLookAndFeel();
         
-        
-        
-
         setIconImage(Toolkit.getDefaultToolkit().getImage(Master.class.getClassLoader().getResource("cochon.png")));
 
         JTabbedPane tabbedPane = new JTabbedPane();
