@@ -44,7 +44,6 @@ public class Bookshop<T extends Work> {
         List<String[]> list;
 
         list = new ArrayList<String[]>();
-        //Set<Map.Entry<String, Work>> entries = stocks.entrySet();
         Set<Map.Entry<String, Stock<T>>> entries = products.entrySet();
         Iterator<Entry<String, Stock<T>>> entriesIterator = entries.iterator();
 
@@ -144,5 +143,22 @@ public class Bookshop<T extends Work> {
         }
         
         reader.close();
+    }
+    
+    public Stock<T> offerRandomItem() throws StockDepletedException {
+        Stock<T> itemToOffer = null;
+        
+        Set<Map.Entry<String, Stock<T>>> entries = products.entrySet();
+        Iterator<Entry<String, Stock<T>>> entriesIterator = entries.iterator();
+
+        if (entriesIterator.hasNext()) {
+            Map.Entry mapping = (Map.Entry) entriesIterator.next();
+            Stock<T> b = (Stock) mapping.getValue();
+            if (b.getQuantity() != 0) {
+                itemToOffer = b.takeOutOneItem();
+            }
+        }
+        
+        return itemToOffer;
     }
 }
