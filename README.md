@@ -38,3 +38,9 @@ By default, you are in the order tab. The sales tab shows all sales of the books
 
 ![](resources/screen.PNG)
 
+### Author
+
+
+Paul Repain
+
+
