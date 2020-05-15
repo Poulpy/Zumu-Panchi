@@ -19,12 +19,14 @@ import fr.uvsq.zumu_panchi.view.SalesPane;
 
 public class BookshopController implements MouseListener, ActionListener {
 
+    // Models
     private Bookshop bookshop;
     private Cart<Work> cart;
     private SalesJournal salesJournal;
     private int loyaltyPoints;
     private final int THRESHOLD = 500;
     
+    // Views
     private SalesPane salesPane;
     private OrderPane orderPane;
 
@@ -70,6 +72,10 @@ public class BookshopController implements MouseListener, ActionListener {
     }
 
     @Override
+    /**
+     * Triggered when the user clicks on the order button
+     * TODO refactor
+     */
     public void actionPerformed(ActionEvent e) {
         Stock freeItem;
         
@@ -115,6 +121,11 @@ public class BookshopController implements MouseListener, ActionListener {
 
 
     @Override
+    /**
+     * When the user clicks on a book of the bookshop
+     * or
+     * a book of the cart
+     */
     public void mouseClicked(MouseEvent e) {
         if (e.getClickCount() == 1 || e.getClickCount() == 2) {
 
@@ -133,6 +144,10 @@ public class BookshopController implements MouseListener, ActionListener {
         }
     }
 
+    /**
+     * Get selected item in the cart in the view
+     * @return
+     */
     public Stock getItemSelectedFromCart() {
         JList<String> cartList = orderPane.getCartList();
 
@@ -141,6 +156,10 @@ public class BookshopController implements MouseListener, ActionListener {
         return this.bookshop.getWork(itemToRemove);
     }
 
+    /**
+     * Get selected item in the bookshop table in the view
+     * @return
+     */
     public Stock<Work> getItemSelectedFromBookshop() {
         JTable table = orderPane.getTable();
 

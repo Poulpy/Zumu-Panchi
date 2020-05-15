@@ -15,42 +15,51 @@ import fr.uvsq.zumu_panchi.model.SalesJournal;
 import fr.uvsq.zumu_panchi.model.SalesTable;
 
 public class SalesPane extends JPanel {
-    
-    
+
+    /**
+     * Table model storing the sales
+     */
     private SalesTable modelTable;
+
+    /**
+     * Table showing the sales
+     */
     private JTable table;
-	
-	public SalesPane(BookshopController controller) {
-		JLabel title;
-		
-		title = new JLabel("Sales journal");
-		
+
+    public SalesPane(BookshopController controller) {
+        JLabel title;
+
+        title = new JLabel("Sales journal");
+
         this.setLayout(new GridBagLayout());
 
         title.setFont(new Font("Calibri", Font.BOLD, 30));
 
+        // for managing the events related to the model
         controller.setSalesPane(this);
+
         this.modelTable = new SalesTable(controller.getSalesJournal());
         this.table = new JTable(this.modelTable);
         this.table.setRowHeight(30);
 
-        
         GridBagConstraints c = new GridBagConstraints();
         c.insets = new Insets(6, 6, 6, 6);
-        
+
+        // PLACING THE COMPONENTS
+
         c.anchor = GridBagConstraints.WEST;
         c.gridx = 0;
         c.gridy = 0;
         c.weightx = 1.0;
         this.add(title, c);
-        
+
         c.gridx = 0;
         c.gridy = 1;
         c.fill = GridBagConstraints.BOTH;
         c.weighty = 3.0;
         this.add(new JScrollPane(this.table), c);
-	}
-	
+    }
+
     public void updateSalesView(SalesJournal sales) {
         modelTable.update(sales);
         modelTable.fireTableDataChanged();
