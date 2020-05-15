@@ -21,6 +21,7 @@ import javax.swing.Timer;
 import fr.uvsq.zumu_panchi.controller.BookshopController;
 import fr.uvsq.zumu_panchi.model.Bookshop;
 import fr.uvsq.zumu_panchi.model.Cart;
+import fr.uvsq.zumu_panchi.model.WorksTable;
 
 @SuppressWarnings("serial")
 /**

@@ -1,11 +1,17 @@
-package fr.uvsq.zumu_panchi.view;
+package fr.uvsq.zumu_panchi.model;
 
 import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
 
-import fr.uvsq.zumu_panchi.model.SalesJournal;
-
+@SuppressWarnings("serial")
+/**
+ * Underlying model for the JTable containing
+ * the sales objects
+ * 
+ * @author paul
+ *
+ */
 public class SalesTable extends AbstractTableModel {
 
     /**

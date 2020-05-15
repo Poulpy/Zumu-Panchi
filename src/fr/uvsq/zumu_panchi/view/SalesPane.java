@@ -12,6 +12,7 @@ import javax.swing.JTable;
 
 import fr.uvsq.zumu_panchi.controller.BookshopController;
 import fr.uvsq.zumu_panchi.model.SalesJournal;
+import fr.uvsq.zumu_panchi.model.SalesTable;
 
 public class SalesPane extends JPanel {
     

@@ -1,13 +1,19 @@
-package fr.uvsq.zumu_panchi.view;
+package fr.uvsq.zumu_panchi.model;
 
 
 import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
 
-import fr.uvsq.zumu_panchi.model.Bookshop;
-
 @SuppressWarnings("serial")
+/**
+ * Table model for works. Table model are objects
+ * containing the datas of a JTable. The update of such tables then
+ * is simplified.
+ * 
+ * @author paul
+ *
+ */
 public class WorksTable extends AbstractTableModel {
 
     /**
