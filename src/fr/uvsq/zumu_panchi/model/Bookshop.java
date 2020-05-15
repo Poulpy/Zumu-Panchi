@@ -139,7 +139,6 @@ public class Bookshop<T extends Work> {
     /**
      * Take a random item from the bookshop
      * @return the item
-     * @throws ItemOutOfStockException
      */
     public Stock<T> offerRandomItem() {
         Stock<T> itemToOffer = null;

@@ -38,8 +38,6 @@ public class BookshopController implements MouseListener, ActionListener {
     /**
      * Takes out one item from the bookshop and add it to the cart
      * 
-     * @param row
-     * @param col
      * @throws ItemOutOfStockException
      */
     public void addItemToCart() throws ItemOutOfStockException {

@@ -31,7 +31,6 @@ public class Cart<T extends Work> {
     /**
      * Remove an item from the cart
      * 
-     * @param work
      * @throws ItemOutOfStockException
      */
     public void removeItemFromCart(Stock<T> item) throws ItemOutOfStockException {
@@ -68,7 +67,6 @@ public class Cart<T extends Work> {
      * Add an item to the cart If the item's already present, increases the stock of
      * the batch of items
      * 
-     * @param work
      */
     public void addItemToCart(Stock<T> item) {
         if (items.containsKey(item.getTitle())) {
