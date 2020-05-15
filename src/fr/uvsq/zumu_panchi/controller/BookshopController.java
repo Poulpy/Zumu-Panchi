@@ -116,7 +116,7 @@ public class BookshopController implements MouseListener, ActionListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        if (e.getClickCount() == 1) {
+        if (e.getClickCount() == 1 || e.getClickCount() == 2) {
 
             try {
                 // Add to cart
